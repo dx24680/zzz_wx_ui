@@ -24,6 +24,70 @@ ui_router_app_pqrst = [
         ]
     },
     //
+    // quan_info
+    //
+    {
+        path: `/:id/z_ui/z_app/quan_info/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/quan_info/quan_info__quan_1__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/quan_info/quan_info__quan_1__list`,
+                component: httpVueLoader(`/z_ui/z_app/quan_info/quan_info__quan_1__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/quan_info/quan_info__setting__edit`,
+                component: httpVueLoader(`/z_ui/z_app/quan_info/quan_info__setting__edit.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // redbook
+    //
+    {
+        path: `/:id/z_ui/z_app/redbook/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/redbook/redbook__quan_1__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/redbook/redbook__quan_1__list`,
+                component: httpVueLoader(`/z_ui/z_app/redbook/redbook__quan_1__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/redbook/redbook__comment__list`,
+                component: httpVueLoader(`/z_ui/z_app/redbook/redbook__comment__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/redbook/redbook__comment_sub__list`,
+                component: httpVueLoader(`/z_ui/z_app/redbook/redbook__comment_sub__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/redbook/redbook__quan__list`,
+                component: httpVueLoader(`/z_ui/z_app/redbook/redbook__quan__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/redbook/redbook__topic__list`,
+                component: httpVueLoader(`/z_ui/z_app/redbook/redbook__topic__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/redbook/redbook__topic__edit`,
+                component: httpVueLoader(`/z_ui/z_app/redbook/redbook__topic__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/redbook/redbook__setting__edit`,
+                component: httpVueLoader(`/z_ui/z_app/redbook/redbook__setting__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/redbook/redbook__topic__rank__list`,
+                component: httpVueLoader(`/z_ui/z_app/redbook/redbook__topic__rank__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/redbook/redbook__topic__rank__edit`,
+                component: httpVueLoader(`/z_ui/z_app/redbook/redbook__topic__rank__edit.vue?${g_version}`),
+            },
+        ]
+    },
+    //
     // star_act 快乐星球活动
     //
     {

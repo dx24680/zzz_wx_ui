@@ -270,6 +270,29 @@ function func_vue_new_methods()
                 // });
             });
         },
+        funcApply: function (apply)
+        {
+            let errmsg = "不通过，确定吗？";
+            if (apply == 1)
+            {
+                errmsg = "通过，确定吗？";
+            }
+            let ids = func_vue_get_selected_ids(this);
+            if (ids == '')
+            {
+                g_vue.$alert(`至少选择一项`, '提示', {
+                    type: "error"
+                });
+                return;
+            }
+
+            let settings = func_vue_ajax_settings();
+            settings.url = this.apply_url;
+            settings.msg_confirm = errmsg;
+            settings.msg_success = '成功';
+            settings.form_data = {ids: ids, apply: apply};
+            this.func_ajax(settings);
+        },
     }
 }
 
