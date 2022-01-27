@@ -2,7 +2,21 @@ console.log('ui_router_app_pqrst.js');
 
 ui_router_app_pqrst = [
     //
-    // prize_b
+    // password
+    //
+    {
+        path: `/:id/z_ui/z_app/password/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/password/password__edit`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/password/password__edit`,
+                component: httpVueLoader(`/z_ui/z_app/password/password__edit.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // prize_b 我的宝箱
     //
     {
         path: `/:id/z_ui/z_app/prize_b/a_index`,
@@ -24,7 +38,108 @@ ui_router_app_pqrst = [
         ]
     },
     //
-    // quan_info
+    // prize_stock 库存导入
+    //
+    {
+        path: `/:id/z_ui/z_app/prize_stock/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/prize_stock/prize_stock_code__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/prize_stock/prize_stock_code__list`,
+                component: httpVueLoader(`/z_ui/z_app/prize_stock/prize_stock_code__list.vue?${g_version}`),
+            }, {
+                path: `/:id/z_ui/z_app/prize_stock/prize_stock_code__import`,
+                component: httpVueLoader(`/z_ui/z_app/prize_stock/prize_stock_code__import.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // play_multi 每日开奖
+    //
+    {
+        path: `/:id/z_ui/z_app/play_multi/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/play_multi/play_multi_act__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_act__list`,
+                component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_act__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_act__edit`,
+                component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_act__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_design__edit`,
+                component: httpVueLoader(`/z_ui/z_app/star_act/star_act__design__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_prize_group__list`,
+                component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_prize_group__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_prize_group__edit`,
+                component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_prize_group__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_prize__list`,
+                component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_prize__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_prize__edit`,
+                component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_prize__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_chou__list`,
+                component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_chou__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_prize_stock__edit`,
+                component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_prize_stock__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_prize__copy_edit`,
+                component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_prize__copy_edit.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // qr 二维码
+    //
+    {
+        path: `/:id/z_ui/z_app/qr/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/qr/a_index`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/qr/a_index`,
+                component: httpVueLoader(`/z_ui/z_app/qr/a_index.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/qr/qr__list`,
+                component: httpVueLoader(`/z_ui/z_app/qr/qr__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/qr/qr__edit`,
+                component: httpVueLoader(`/z_ui/z_app/qr/qr__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/qr/qr__datedata__export`,
+                component: httpVueLoader(`/z_ui/z_app/qr/qr__datedata__export.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/qr/qr__wxapp__list`,
+                component: httpVueLoader(`/z_ui/z_app/qr/qr__wxapp__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/qr/qr__wxapp__edit`,
+                component: httpVueLoader(`/z_ui/z_app/qr/qr__wxapp__edit.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // quan_info 企业朋友圈
     //
     {
         path: `/:id/z_ui/z_app/quan_info/a_index`,
@@ -42,7 +157,7 @@ ui_router_app_pqrst = [
         ]
     },
     //
-    // redbook
+    // redbook 小红书
     //
     {
         path: `/:id/z_ui/z_app/redbook/a_index`,
@@ -147,7 +262,7 @@ ui_router_app_pqrst = [
         ]
     },
     //
-    // star_invite
+    // star_invite 邀请好友
     //
     {
         path: `/:id/z_ui/z_app/star_invite/a_index`,
@@ -174,7 +289,7 @@ ui_router_app_pqrst = [
         ]
     },
     //
-    // sms
+    // sms 短信
     //
     {
         path: `/:id/z_ui/z_app/sms/a_index`,
@@ -201,6 +316,85 @@ ui_router_app_pqrst = [
             {
                 path: `/:id/z_ui/z_app/sms/sms__option__edit`,
                 component: httpVueLoader(`/z_ui/z_app/sms/sms__option__edit.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // subscribemsg 订阅消息
+    //
+    {
+        path: `/:id/z_ui/z_app/subscribemsg/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/subscribemsg/subscribemsg__wxapp__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/subscribemsg/subscribemsg__wxapp__list`,
+                component: httpVueLoader(`/z_ui/z_app/subscribemsg/subscribemsg__wxapp__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/subscribemsg/subscribemsg__wxapp__edit`,
+                component: httpVueLoader(`/z_ui/z_app/subscribemsg/subscribemsg__wxapp__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/subscribemsg/subscribemsg__log`,
+                component: httpVueLoader(`/z_ui/z_app/subscribemsg/subscribemsg__log.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // sign_in 签到
+    //
+    {
+        path: `/:id/z_ui/z_app/sign_in/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/sign_in/sign_in__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/sign_in/sign_in__list`,
+                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sign_in/sign_in__edit`,
+                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sign_in/sign_in__user_list`,
+                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__user_list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sign_in/sign_in__log`,
+                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__log.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // prize_pool 奖品池
+    //
+    {
+        path: `/:id/z_ui/z_app/prize_pool/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/prize_pool/prize_pool__item__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/prize_pool/prize_pool__item__list`,
+                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__item__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/prize_pool/prize_pool__item__edit`,
+                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__item__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/prize_pool/prize_pool__prize__list`,
+                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__prize__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/prize_pool/prize_pool__prize__edit`,
+                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__prize__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/prize_pool/prize_pool__win_data__list`,
+                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__win_data__list.vue?${g_version}`),
             },
         ]
     },

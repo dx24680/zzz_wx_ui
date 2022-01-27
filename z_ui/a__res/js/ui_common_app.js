@@ -252,6 +252,11 @@ function func_vue_new_methods()
         {
             func_vue_save(this);
         },
+        funcReset: function ()
+        {
+            this.$refs['form'].resetFields();
+            this.v_errors = {};
+        },
         funcImport: function ()
         {
             g_vue.$prompt('请输入内容', '提示', {
@@ -292,6 +297,19 @@ function func_vue_new_methods()
             settings.msg_success = '成功';
             settings.form_data = {ids: ids, apply: apply};
             this.func_ajax(settings);
+        },
+        funcUploadBefore__img(file) {
+            console.log('funcUploadBefore_img');
+            console.log(file);
+            if (file.type != 'image/jpeg' && file.type != 'image/png' && file.type != 'image/gif') {
+                this.$message.error('只能上传 png | jpg | gif 格式的图片');
+                return false;
+            }
+            if (file.size > 1024 * 1024) {
+                this.$message.error('上传文件大小不能超过 1M');
+                return false;
+            }
+            return true;
         },
     }
 }

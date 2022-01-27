@@ -36,7 +36,6 @@ function func_vue_validation_init(vue)
     vue.form_rules = form_rules;
 }
 
-
 function func_vue_get_form_data(vue)
 {
     console.log("func_vue_get_form_data", vue.cookie_data);
@@ -56,7 +55,7 @@ function func_vue_get_form_data(vue)
 
 function func_vue_list_watch_route_handler(vue, callback)
 {
-    console.log('func_vue_list_watch_route_handler');
+    console.log('func_vue_list_watch_route_handler',vue.did_first_run_list);
     //console.log("did_first_run_list", vue.did_first_run_list, vue.$route.path);
     if (vue.did_first_run_list)
     {
@@ -64,7 +63,7 @@ function func_vue_list_watch_route_handler(vue, callback)
     }
     else if (vue.$route.path.indexOf(vue.route_path) != -1)
     {
-        //console.log("first_run 页面返回", vue.$route.path, vue.route_path);
+        console.log("first_run 页面返回", vue.$route.path, vue.route_path);
         if (callback)
         {
             callback();

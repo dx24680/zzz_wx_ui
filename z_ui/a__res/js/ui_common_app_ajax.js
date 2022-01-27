@@ -44,7 +44,10 @@ function func_vue_ajax(vue, settings)
             }
             else
             {
-                vue.$message.success(settings.msg_success);
+                if (settings.msg_success != '')
+                {
+                    vue.$message.success(settings.msg_success);
+                }
                 if (settings.success_callback)
                 {
                     settings.success_callback(vue, data);
@@ -149,6 +152,19 @@ function func_vue_save(vue)
     console.log('func_vue_save');
     func_loading();
     let form_data = func_vue_get_form_data(vue);
+    if (typeof (vue.func_vue_save_before) !== "undefined")
+    {
+        //自定义保存前操作
+        try
+        {
+            vue.func_vue_save_before(form_data);
+        }
+        catch (e)
+        {
+            console.error(e);
+        }
+    }
+
     console.log('func_vue_save', form_data);
     func_post(vue.ajax_url_save, form_data)
         .then(data =>
@@ -170,6 +186,7 @@ function func_vue_save(vue)
                 else
                 {
                     vue.$message.success("保存成功");
+                    if(form_data.checked) return
                     vue.func_back();
                 }
             }

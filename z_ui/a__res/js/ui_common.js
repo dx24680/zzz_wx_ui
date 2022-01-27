@@ -242,3 +242,28 @@ function func_get_id_incr()
     return func_get_id_incr__val;
 }
 
+//获取图片路径
+function funcGetImgUrl(url)
+{
+    if (!url)
+    {
+        return ''
+    }
+    if (url.indexOf('http') == 0)
+    {
+        return url
+    }
+
+    return g_config.img_root + url
+}
+
+
+
+//=================保存后停留处理===================
+var key_checked = location.href + "checked";
+if (sessionStorage[key_checked]) {
+    g_vue.form.checked = sessionStorage[key_checked] == 'true' ? true : false;
+}
+function funcChecked(e) {
+    sessionStorage[key_checked] = e;
+}
