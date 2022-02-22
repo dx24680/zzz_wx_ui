@@ -62,7 +62,7 @@ function func_vue_ajax(vue, settings)
 }
 
 
-function func_vue_list(vue, page)
+function func_vue_list(vue, page,callback)
 {
     console.log("func_vue_list", page);
 
@@ -89,13 +89,19 @@ function func_vue_list(vue, page)
                 vue.app_title = data.app_title;
                 vue.admin_page = data.admin_page;
                 vue.list_data = data.list_data;
-                vue.func_set_page_data(data.page_data);
+                vue.list = data.list;
+                if(data.page_data){
+                    vue.func_set_page_data(data.page_data);
+                }
                 if (data.form)
                 {
                     let v_form = {};
                     Object.assign(v_form, vue.form)
                     Object.assign(v_form, data.form) //接口优先级最高
                     vue.form = v_form;
+                }
+                if(callback){
+                    callback(data);
                 }
             }
         })
@@ -195,6 +201,7 @@ function func_vue_save(vue)
         .catch(err =>
         {
             func_loading(false);
+            console.log("111111111111111111111111",err)
             if (err.response.status == 422)
             {
                 console.log('err', err.response);

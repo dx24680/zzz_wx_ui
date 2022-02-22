@@ -1,35 +1,35 @@
 console.log('ui_router.js')
 
 g_router_data = {
-    whiteList: ['/z_ui/a_admin/index_qr', '/404', "/z_ui/a_admin/center_re"],
-    center_list: ["ad", "acc", "cash"],
+    whiteList: [`/${g_z_ui_dir}/a_admin/index_qr`, '/404', `/${g_z_ui_dir}/a_admin/center_re`],
+    center_list: g_z_ui_dir == 'z_ui_user' ? ["user", "xxx"] : ["ad", "acc", "cash"],
 }
 
 
 g_routes = [
     {
-        path: '/z_ui/a_admin/index_qr',
-        component: httpVueLoader(`/z_ui/a_admin/index_qr.vue?${g_version}`),
+        path: `/${g_z_ui_dir}/a_admin/index_qr`,
+        component: httpVueLoader(`/${g_z_ui_dir}/a_admin/index_qr.vue?${g_version}`),
         meta: {title: "扫描二维码"}
     },
     {
         path: '/',
-        component: httpVueLoader(`/z_ui/a_admin/center.vue?${g_version}`),
+        component: httpVueLoader(`/${g_z_ui_dir}/a_admin/center.vue?${g_version}`),
         meta: {title: "app"}
     },
     {
-        path: '/z_ui/a_admin/center_re',
-        component: httpVueLoader(`/z_ui/a_admin/center_re.vue?${g_version}`),
+        path: `/${g_z_ui_dir}/a_admin/center_re`,
+        component: httpVueLoader(`/${g_z_ui_dir}/a_admin/center_re.vue?${g_version}`),
         meta: {title: "center_re"}
     },
     {
         path: '/404',
-        component: httpVueLoader(`/z_ui/a_admin/index_url.vue?${g_version}`),
+        component: httpVueLoader(`/${g_z_ui_dir}/a_admin/index_url.vue?${g_version}`),
         meta: {title: "404"}
     },
     {
         path: '*',
-        component: httpVueLoader(`/z_ui/a_admin/index_url.vue?${g_version}`),
+        component: httpVueLoader(`/${g_z_ui_dir}/a_admin/index_url.vue?${g_version}`),
         meta: {title: "404"}
     },
 ]
@@ -38,25 +38,25 @@ g_router_data.center_list.forEach((item, index) =>
 {
     let add_list = [
         {
-            path: `/z_ui/a_admin/index/${item}`,
-            component: httpVueLoader(`/z_ui/a_admin/index.vue?${g_version}`),
+            path: `/${g_z_ui_dir}/a_admin/index/${item}`,
+            component: httpVueLoader(`/${g_z_ui_dir}/a_admin/index.vue?${g_version}`),
             meta: {title: `微信运营系统`}
         },
         {
-            path: `/z_ui/a_admin/center_${item}`,
-            component: httpVueLoader(`/z_ui/a_admin/center_${item}.vue?${g_version}`),
+            path: `/${g_z_ui_dir}/a_admin/center_${item}`,
+            component: httpVueLoader(`/${g_z_ui_dir}/a_admin/center_${item}.vue?${g_version}`),
             meta: {title: "微信运营系统"},
             // children: [
             // 	{
-            // 		path: '/z_ui/a_admin/center_re',
-            // 		component: httpVueLoader(`/z_ui/a_admin/center_re.vue?${g_version}`),
+            // 		path: `/${g_z_ui_dir}/a_admin/center_re`,
+            // 		component: httpVueLoader(`/${g_z_ui_dir}/a_admin/center_re.vue?${g_version}`),
             // 		meta: { title: "center_re" }
             // 	},
             // ]
         },
         {
             path: `/${item}`,
-            component: httpVueLoader(`/z_ui/a_admin/center_${item}.vue?${g_version}`),
+            component: httpVueLoader(`/${g_z_ui_dir}/a_admin/center_${item}.vue?${g_version}`),
             meta: {title: "首页"}
         }
     ]
@@ -73,7 +73,7 @@ g_router.beforeEach((to, from, next) =>
 {
     console.log("导航守卫：", to.path, from)
     clearTimeout(g_common_data.timeout_index_qr)
-    // if (from.path == "/z_ui/a_admin/index_qr") {
+    // if (from.path == `/${g_z_ui_dir}/a_admin/index_qr`) {
     // 	console.log("来自二维码页，清掉check定时")
     // }
     document.title = to.meta.title
@@ -102,9 +102,9 @@ g_router.beforeEach((to, from, next) =>
         else
         {
             let new_center_id = ""
-            if (to.path.indexOf("/z_ui/a_admin/center_") != -1)
+            if (to.path.indexOf(`/${g_z_ui_dir}/a_admin/center_`) != -1)
             {
-                new_center_id = to.path.split("/z_ui/a_admin/center_")[1]
+                new_center_id = to.path.split(`/${g_z_ui_dir}/a_admin/center_`)[1]
             }
             else
             {
@@ -114,9 +114,9 @@ g_router.beforeEach((to, from, next) =>
             {
                 console.log("去不同首页也要重新登录", to.path)
                 let new_center_id = ""
-                if (to.path.indexOf("/z_ui/a_admin/center_") != -1)
+                if (to.path.indexOf(`/${g_z_ui_dir}/a_admin/center_`) != -1)
                 {
-                    new_center_id = to.path.split("/z_ui/a_admin/center_")[1]
+                    new_center_id = to.path.split(`/${g_z_ui_dir}/a_admin/center_`)[1]
                 }
                 else
                 {
@@ -125,7 +125,7 @@ g_router.beforeEach((to, from, next) =>
                 func_remove_cookie("token_login")
                 func_remove_cookie("token_qr")
                 func_remove_cookie("center_id")
-                login_url = `/z_ui/a_admin/index/${new_center_id}`
+                login_url = `/${g_z_ui_dir}/a_admin/index/${new_center_id}`
                 func_set_cookie("login_url", login_url)
                 next({path: login_url, query: {site_id: site_id}})
             }
@@ -134,7 +134,7 @@ g_router.beforeEach((to, from, next) =>
                 if (g_router_data.center_list.indexOf(to.path.split("/")[1]) != -1)
                 {
                     console.log("进缩写首页，换完整路径", to.path.split("/")[1])
-                    next("/z_ui/a_admin/center_" + to.path.split("/")[1])
+                    next(`/${g_z_ui_dir}/a_admin/center_` + to.path.split("/")[1])
                     return
                 }
                 next()
@@ -144,7 +144,7 @@ g_router.beforeEach((to, from, next) =>
     else
     {
         console.log('未有token_qr', token_login, g_router_data.whiteList)
-        if (to.path.indexOf("/z_ui/a_admin/index/") != -1)
+        if (to.path.indexOf(`/${g_z_ui_dir}/a_admin/index/`) != -1)
         {
             // 去登录（多一步记录）
             func_set_cookie("login_url", to.path)
@@ -155,13 +155,13 @@ g_router.beforeEach((to, from, next) =>
             if (token_login && g_common_data.auth_qr)
             {
                 // 已登录且有二维码
-                if (from.path == "/z_ui/a_admin/index_qr")
+                if (from.path == `/${g_z_ui_dir}/a_admin/index_qr`)
                 {
                     console.log("在二维码页改路径跳转的，先去登录", to.path)
                     func_remove_cookie("token_login")
-                    if (g_router_data.center_list.indexOf(to.path.split("/")[1]) != -1 || g_router_data.center_list.indexOf(to.path.split("/z_ui/a_admin/center_")[1]) != -1)
+                    if (g_router_data.center_list.indexOf(to.path.split("/")[1]) != -1 || g_router_data.center_list.indexOf(to.path.split(`/${g_z_ui_dir}/a_admin/center_`)[1]) != -1)
                     {
-                        login_url = `/z_ui/a_admin/index/${to.path.split("/")[1]}`
+                        login_url = `/${g_z_ui_dir}/a_admin/index/${to.path.split("/")[1]}`
                         func_set_cookie("login_url", login_url)
                         next({path: login_url, query: {site_id: site_id}})
                     }
@@ -176,7 +176,7 @@ g_router.beforeEach((to, from, next) =>
                 else
                 {
                     // 去二维码的，放行
-                    next(`/z_ui/a_admin/index_qr`)
+                    next(`/${g_z_ui_dir}/a_admin/index_qr`)
                 }
             }
             else
@@ -192,7 +192,7 @@ g_router.beforeEach((to, from, next) =>
                     // 在404直接改路径进入时，这里处理
                     if (g_router_data.center_list.indexOf(to.path.split("/")[1]) != -1)
                     {
-                        login_url = `/z_ui/a_admin/index/${to.path.split("/")[1]}`
+                        login_url = `/${g_z_ui_dir}/a_admin/index/${to.path.split("/")[1]}`
                         func_set_cookie("login_url", login_url)
                     }
                     next({path: login_url, query: to.query || ""})
@@ -215,10 +215,10 @@ function router_set_url()
     {
         console.log("now_url", now_url)
         // 是不是登录页
-        if (now_url.indexOf("/z_ui/a_admin/index/") != -1)
+        if (now_url.indexOf(`/${g_z_ui_dir}/a_admin/index/`) != -1)
         {
             func_set_cookie("login_url", now_url)
-            func_set_cookie("center_url", `/z_ui/a_admin/center_${now_url.split("/z_ui/a_admin/index/")[1]}`)
+            func_set_cookie("center_url", `/${g_z_ui_dir}/a_admin/center_${now_url.split("/" + g_z_ui_dir + "/a_admin/index/")[1]}`)
         }
         else
         {
@@ -226,7 +226,7 @@ function router_set_url()
             if (g_router_data.whiteList.indexOf(now_url) != -1) return
             if (!func_get_cookie("login_url"))
             {
-                func_set_cookie("login_url", `/z_ui/a_admin/index/${now_url.split("/z_ui/a_admin/center_")[1] || now_url.split("/")[1]}`)
+                func_set_cookie("login_url", `/${g_z_ui_dir}/a_admin/index/${now_url.split("/" + g_z_ui_dir + "/a_admin/center_")[1] || now_url.split("/")[1]}`)
             }
         }
     }
@@ -234,10 +234,10 @@ function router_set_url()
     {
         // 没路径，只有域名不给默认
         // if (!func_get_cookie("login_url")) {
-        // 	func_set_cookie("login_url", "/z_ui/a_admin/index/ad")
+        // 	func_set_cookie("login_url", `/${g_z_ui_dir}/a_admin/index/ad`)
         // }
         // if (!func_get_cookie("center_url")) {
-        // 	func_set_cookie("center_url", `/z_ui/a_admin/center_ad`)
+        // 	func_set_cookie("center_url", `/${g_z_ui_dir}/a_admin/center_ad`)
         // }
     }
 

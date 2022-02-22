@@ -24,7 +24,16 @@ axios.interceptors.response.use(
     {
         if (error.response)
         {
-            func_frameError_msg(error.response.data);
+            if (g_z_ui_dir == "z_ui_user" && error.response.status != 422)
+            {
+                let errmsg_ex_copy = JSON.parse(JSON.stringify(error.response.data.errmsg_ex))
+                error.response.data.errmsg_ex = errmsg_ex_copy.split(";")
+                func_frameError_msg(JSON.stringify(error.response.data, null, 2));
+            }
+            else
+            {
+                func_frameError_msg(error.response.data);
+            }
             if (error.response.status != 422)
             {
                 {

@@ -7,15 +7,15 @@ g_router_data = {
 g_routes = [
     {
         path: '/admin',
-        component: httpVueLoader(`/z_ui/z_app/a_tmpl/admin.vue?${g_version}`),
+        component: httpVueLoader(`/${g_z_ui_dir}/z_app/a_tmpl/admin.vue?${g_version}`),
     },
     {
         path: '/:id/export_list',
-        component: httpVueLoader(`/z_ui/z_app/a_tmpl/export_list.vue?${g_version}`),
+        component: httpVueLoader(`/${g_z_ui_dir}/z_app/a_tmpl/export_list.vue?${g_version}`),
     },
     {
         path: '*',
-        component: httpVueLoader(`/z_ui/a_admin/index_url.vue?${g_version}`),
+        component: httpVueLoader(`/${g_z_ui_dir}/a_admin/index_url.vue?${g_version}`),
         meta: {title: "404"}
     }
 ]
@@ -25,6 +25,7 @@ g_routes = g_routes.concat(ui_router_app_fghij);
 g_routes = g_routes.concat(ui_router_app_klmno);
 g_routes = g_routes.concat(ui_router_app_pqrst);
 g_routes = g_routes.concat(ui_router_app_uvwxyz);
+g_routes = g_routes.concat(ui_router_app_z_class);
 
 
 g_router = new VueRouter({

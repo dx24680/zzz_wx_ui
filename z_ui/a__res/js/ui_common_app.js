@@ -44,6 +44,7 @@ function func_vue_new_data()
         */
         admin_page: {},
         list_data: [], //表格数据列表
+        list: [],
         page_data: {}, //分页器数据
         app_title: "", //应用标题
         selected_data: "", //选中列表
@@ -133,14 +134,14 @@ function func_vue_new_methods()
             query_res.page = page;
             g_vue.$router.replace({path: path_res, query: query_res})
         },
-        func_list: function (page)
+        func_list: function (page, callback)
         {
             console.log("func_list", page);
             if (typeof (page) == 'undefined')
             {
                 page = this.$route.query.page;
             }
-            func_vue_list(this, page);
+            func_vue_list(this, page, callback);
         },
         func_reload: function ()
         {
@@ -298,14 +299,17 @@ function func_vue_new_methods()
             settings.form_data = {ids: ids, apply: apply};
             this.func_ajax(settings);
         },
-        funcUploadBefore__img(file) {
+        funcUploadBefore__img(file)
+        {
             console.log('funcUploadBefore_img');
             console.log(file);
-            if (file.type != 'image/jpeg' && file.type != 'image/png' && file.type != 'image/gif') {
+            if (file.type != 'image/jpeg' && file.type != 'image/png' && file.type != 'image/gif')
+            {
                 this.$message.error('只能上传 png | jpg | gif 格式的图片');
                 return false;
             }
-            if (file.size > 1024 * 1024) {
+            if (file.size > 1024 * 1024)
+            {
                 this.$message.error('上传文件大小不能超过 1M');
                 return false;
             }

@@ -8,14 +8,17 @@ function func_vue_created(vue)
 }
 
 
-function func_vue_mounted(vue)
+function func_vue_mounted(vue, do_validation_init = true)
 {
     //console.log("func_vue_mounted", vue, vue.$route);
     vue.vue_this = vue;
     vue.route_path = vue.$route.path;
     vue.route_id = vue.$route.params.id;
     vue.cookie_data = JSON.parse(localStorage.getItem(`data_${vue.route_id}`));
-    func_vue_validation_init(vue);
+    if (do_validation_init)
+    {
+        func_vue_validation_init(vue);
+    }
 }
 
 
@@ -55,7 +58,7 @@ function func_vue_get_form_data(vue)
 
 function func_vue_list_watch_route_handler(vue, callback)
 {
-    console.log('func_vue_list_watch_route_handler',vue.did_first_run_list);
+    console.log('func_vue_list_watch_route_handler', vue.did_first_run_list);
     //console.log("did_first_run_list", vue.did_first_run_list, vue.$route.path);
     if (vue.did_first_run_list)
     {

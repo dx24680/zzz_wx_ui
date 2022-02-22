@@ -1,6 +1,7 @@
 console.log('ui_router_app_klmno.js');
 
 ui_router_app_klmno = [
+
     //
     // mall_fun_b 积分商城
     //
@@ -32,6 +33,46 @@ ui_router_app_klmno = [
             {
                 path: `/:id/z_ui/z_app/mall_fun_b/mall_fun__goods__info__edit`,
                 component: httpVueLoader(`/z_ui/z_app/mall_fun_b/mall_fun__goods__info__edit.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // media 多媒体上传
+    //
+    {
+        path: `/:id/z_ui/z_app/media/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/media/media__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/media/media__list`,
+                component: httpVueLoader(`/z_ui/z_app/media/media__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/media/media__edit`,
+                component: httpVueLoader(`/z_ui/z_app/media/media__edit.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // menu 自定义菜单
+    //
+    {
+        path: `/:id/z_ui/z_app/menu/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/menu/menu__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/menu/menu__list`,
+                component: httpVueLoader(`/z_ui/z_app/menu/menu__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/menu/menu__edit`,
+                component: httpVueLoader(`/z_ui/z_app/menu/menu__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/menu/menu_stat__list`,
+                component: httpVueLoader(`/z_ui/z_app/menu/menu_stat__list.vue?${g_version}`),
             },
         ]
     },

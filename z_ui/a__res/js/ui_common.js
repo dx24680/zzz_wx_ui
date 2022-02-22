@@ -11,6 +11,16 @@ function funcIsDev()
 }
 
 
+var g_z_ui_dir = 'z_ui';
+var g_z_app_dir = 'admin';
+if (location.pathname.indexOf('/z_ui_user/') == 0)
+{
+    g_z_ui_dir = 'z_ui_user';
+    g_z_app_dir = 'web';
+}
+console.log('g_z_ui_dir', g_z_ui_dir);
+
+
 var g_vue;
 
 var g_common_data = {
@@ -137,7 +147,7 @@ function func_init_rem_diy(diy_w = 1920 / 2)
 
 function func_set_cookie(cname, cvalue, time)
 {
-    _.cookie.set(cname, cvalue, {path: '/z_ui'});
+    _.cookie.set(cname, cvalue, {path: `/${g_z_ui_dir}`});
 }
 
 function func_get_cookie(cname)
@@ -148,7 +158,7 @@ function func_get_cookie(cname)
 
 function func_remove_cookie(name)
 {
-    _.cookie.remove(name, {path: '/z_ui'});
+    _.cookie.remove(name, {path: `/${g_z_ui_dir}`});
     // localStorage.removeItem(name)
 }
 
@@ -168,6 +178,7 @@ function func_random_string(n)
 
 function func_loading(toggle = true)
 {
+    console.log("func_loading")
     if (toggle)
     {
         g_vue.loading = g_vue.$loading()
@@ -197,7 +208,7 @@ function func_frameError_msg(msg)
     if (frameError)
     {
         frameError.document.open();
-        frameError.document.write(msg);
+        frameError.document.write(`<pre>${msg}</pre>`);
         frameError.document.close();
     }
 }
@@ -226,6 +237,19 @@ function func_confirm_e(msg, func_then, func_catch)
     }).then(() => func_then()).catch(() => func_catch());
 }
 
+//图片预览
+function func_img_preview(img_url, title = '预览')
+{
+    //需要预览
+    g_vue.$confirm(`<a href="${img_url}" target="_blank"><img src="${img_url}" style="width: 100%;" /></a>`, title, {
+        dangerouslyUseHTMLString: true,
+        showCancelButton: false,
+        showConfirmButton: false,
+        showClose: true
+    }).catch(() =>
+    {
+    })
+}
 
 function func_get_id()
 {
@@ -258,12 +282,14 @@ function funcGetImgUrl(url)
 }
 
 
-
 //=================保存后停留处理===================
 var key_checked = location.href + "checked";
-if (sessionStorage[key_checked]) {
+if (sessionStorage[key_checked])
+{
     g_vue.form.checked = sessionStorage[key_checked] == 'true' ? true : false;
 }
-function funcChecked(e) {
+
+function funcChecked(e)
+{
     sessionStorage[key_checked] = e;
 }

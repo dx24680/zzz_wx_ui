@@ -16,45 +16,6 @@ ui_router_app_pqrst = [
         ]
     },
     //
-    // prize_b 我的宝箱
-    //
-    {
-        path: `/:id/z_ui/z_app/prize_b/a_index`,
-        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
-        redirect: `/:id/z_ui/z_app/prize_b/prize__list`,
-        children: [
-            {
-                path: `/:id/z_ui/z_app/prize_b/prize__list`,
-                component: httpVueLoader(`/z_ui/z_app/prize_b/prize__list.vue?${g_version}`),
-            },
-            {
-                path: `/:id/z_ui/z_app/prize_b/prize__details`,
-                component: httpVueLoader(`/z_ui/z_app/prize_b/prize__details.vue?${g_version}`),
-            },
-            {
-                path: `/:id/z_ui/z_app/prize_b/prize__use`,
-                component: httpVueLoader(`/z_ui/z_app/prize_b/prize__use.vue?${g_version}`),
-            },
-        ]
-    },
-    //
-    // prize_stock 库存导入
-    //
-    {
-        path: `/:id/z_ui/z_app/prize_stock/a_index`,
-        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
-        redirect: `/:id/z_ui/z_app/prize_stock/prize_stock_code__list`,
-        children: [
-            {
-                path: `/:id/z_ui/z_app/prize_stock/prize_stock_code__list`,
-                component: httpVueLoader(`/z_ui/z_app/prize_stock/prize_stock_code__list.vue?${g_version}`),
-            }, {
-                path: `/:id/z_ui/z_app/prize_stock/prize_stock_code__import`,
-                component: httpVueLoader(`/z_ui/z_app/prize_stock/prize_stock_code__import.vue?${g_version}`),
-            },
-        ]
-    },
-    //
     // play_multi 每日开奖
     //
     {
@@ -101,6 +62,111 @@ ui_router_app_pqrst = [
             {
                 path: `/:id/z_ui/z_app/play_multi/play_multi_prize__copy_edit`,
                 component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_prize__copy_edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/play_multi/play_multi_launch__list`,
+                component: httpVueLoader(`/z_ui/z_app/play_multi/play_multi_launch__list.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // prize_b 我的宝箱
+    //
+    {
+        path: `/:id/z_ui/z_app/prize_b/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/prize_b/prize__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/prize_b/prize__list`,
+                component: httpVueLoader(`/z_ui/z_app/prize_b/prize__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/prize_b/prize__details`,
+                component: httpVueLoader(`/z_ui/z_app/prize_b/prize__details.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/prize_b/prize__use`,
+                component: httpVueLoader(`/z_ui/z_app/prize_b/prize__use.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // prize_pool 奖品池
+    //
+    {
+        path: `/:id/z_ui/z_app/prize_pool/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/prize_pool/prize_pool__item__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/prize_pool/prize_pool__item__list`,
+                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__item__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/prize_pool/prize_pool__item__edit`,
+                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__item__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/prize_pool/prize_pool__prize__list`,
+                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__prize__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/prize_pool/prize_pool__prize__edit`,
+                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__prize__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/prize_pool/prize_pool__win_data__list`,
+                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__win_data__list.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // prize_stock 库存导入
+    //
+    {
+        path: `/:id/z_ui/z_app/prize_stock/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/prize_stock/prize_stock_code__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/prize_stock/prize_stock_code__list`,
+                component: httpVueLoader(`/z_ui/z_app/prize_stock/prize_stock_code__list.vue?${g_version}`),
+            }, {
+                path: `/:id/z_ui/z_app/prize_stock/prize_stock_code__import`,
+                component: httpVueLoader(`/z_ui/z_app/prize_stock/prize_stock_code__import.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // push 手动推送
+    //
+    {
+        path: `/:id/z_ui/z_app/push/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/push/push__custom`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/push/push__custom`,
+                component: httpVueLoader(`/z_ui/z_app/push/push__custom.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // push_history_c 历史推送
+    //
+    {
+        path: `/:id/z_ui/z_app/push_history_c/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/push_history_c/push_history__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/push_history_c/push_history__list`,
+                component: httpVueLoader(`/z_ui/z_app/push_history_c/push_history__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/push_history_c/push_history__edit`,
+                component: httpVueLoader(`/z_ui/z_app/push_history_c/push_history__edit.vue?${g_version}`),
             },
         ]
     },
@@ -203,6 +269,137 @@ ui_router_app_pqrst = [
         ]
     },
     //
+    // sheet_b 表单
+    //
+    {
+        path: `/:id/z_ui/z_app/sheet_b/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/sheet_b/sheet_b__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/sheet_b/sheet_b__list`,
+                component: httpVueLoader(`/z_ui/z_app/sheet_b/sheet_b__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sheet_b/sheet_b__edit`,
+                component: httpVueLoader(`/z_ui/z_app/sheet_b/sheet_b__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sheet_b/sheet_b_item__list`,
+                component: httpVueLoader(`/z_ui/z_app/sheet_b/sheet_b_item__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sheet_b/sheet_b_item__edit`,
+                component: httpVueLoader(`/z_ui/z_app/sheet_b/sheet_b_item__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sheet_b/sheet_b_record__list`,
+                component: httpVueLoader(`/z_ui/z_app/sheet_b/sheet_b_record__list.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // sign_in 签到
+    //
+    {
+        path: `/:id/z_ui/z_app/sign_in/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/sign_in/sign_in__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/sign_in/sign_in__list`,
+                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sign_in/sign_in__edit`,
+                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sign_in/sign_in__user_list`,
+                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__user_list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sign_in/sign_in__log`,
+                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__log.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // site 站点设置
+    //
+    {
+        path: `/:id/z_ui/z_app/site/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/site/site__edit`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/site/site__edit`,
+                component: httpVueLoader(`/z_ui/z_app/site/site__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/site/site__alias__edit`,
+                component: httpVueLoader(`/z_ui/z_app/site/site__alias__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/site/site__other`,
+                component: httpVueLoader(`/z_ui/z_app/site/site__other.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/site/a__export__list`,
+                component: httpVueLoader(`/z_ui/z_app/site/a__export__list.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // sitezapp 站点应用
+    //
+    {
+        path: `/:id/z_ui/z_app/sitezapp/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/sitezapp/sitezapp__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/sitezapp/sitezapp__list`,
+                component: httpVueLoader(`/z_ui/z_app/sitezapp/sitezapp__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sitezapp/sitezapp__edit`,
+                component: httpVueLoader(`/z_ui/z_app/sitezapp/sitezapp__edit.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // sms 短信
+    //
+    {
+        path: `/:id/z_ui/z_app/sms/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/sms/sms_setting__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/sms/sms_setting__list`,
+                component: httpVueLoader(`/z_ui/z_app/sms/sms_setting__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/sms/sms_setting__edit`,
+                component: httpVueLoader(`/z_ui/z_app/sms/sms_setting__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sms/sms_log__list`,
+                component: httpVueLoader(`/z_ui/z_app/sms/sms_log__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sms/sms__option__list`,
+                component: httpVueLoader(`/z_ui/z_app/sms/sms__option__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/sms/sms__option__edit`,
+                component: httpVueLoader(`/z_ui/z_app/sms/sms__option__edit.vue?${g_version}`),
+            },
+        ]
+    },
+    //
     // star_act 快乐星球活动
     //
     {
@@ -289,37 +486,6 @@ ui_router_app_pqrst = [
         ]
     },
     //
-    // sms 短信
-    //
-    {
-        path: `/:id/z_ui/z_app/sms/a_index`,
-        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
-        redirect: `/:id/z_ui/z_app/sms/sms_setting__list`,
-        children: [
-            {
-                path: `/:id/z_ui/z_app/sms/sms_setting__list`,
-                component: httpVueLoader(`/z_ui/z_app/sms/sms_setting__list.vue?${g_version}`),
-                //meta: {keepAlive: true}
-            },
-            {
-                path: `/:id/z_ui/z_app/sms/sms_setting__edit`,
-                component: httpVueLoader(`/z_ui/z_app/sms/sms_setting__edit.vue?${g_version}`),
-            },
-            {
-                path: `/:id/z_ui/z_app/sms/sms_log__list`,
-                component: httpVueLoader(`/z_ui/z_app/sms/sms_log__list.vue?${g_version}`),
-            },
-            {
-                path: `/:id/z_ui/z_app/sms/sms__option__list`,
-                component: httpVueLoader(`/z_ui/z_app/sms/sms__option__list.vue?${g_version}`),
-            },
-            {
-                path: `/:id/z_ui/z_app/sms/sms__option__edit`,
-                component: httpVueLoader(`/z_ui/z_app/sms/sms__option__edit.vue?${g_version}`),
-            },
-        ]
-    },
-    //
     // subscribemsg 订阅消息
     //
     {
@@ -343,58 +509,39 @@ ui_router_app_pqrst = [
         ]
     },
     //
-    // sign_in 签到
+    // task_wx_user_update
     //
     {
-        path: `/:id/z_ui/z_app/sign_in/a_index`,
+        path: `/:id/z_ui/z_app/task_wx_user_update/a_index`,
         component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
-        redirect: `/:id/z_ui/z_app/sign_in/sign_in__list`,
+        redirect: {path: `/:id/z_ui/z_app/task_wx_user_update/task_wx_user_update__list`},
         children: [
             {
-                path: `/:id/z_ui/z_app/sign_in/sign_in__list`,
-                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__list.vue?${g_version}`),
+                path: `/:id/z_ui/z_app/task_wx_user_update/task_wx_user_update__list`,
+                component: httpVueLoader(`/z_ui/z_app/task_wx_user_update/task_wx_user_update__list.vue?${g_version}`),
             },
             {
-                path: `/:id/z_ui/z_app/sign_in/sign_in__edit`,
-                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__edit.vue?${g_version}`),
-            },
-            {
-                path: `/:id/z_ui/z_app/sign_in/sign_in__user_list`,
-                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__user_list.vue?${g_version}`),
-            },
-            {
-                path: `/:id/z_ui/z_app/sign_in/sign_in__log`,
-                component: httpVueLoader(`/z_ui/z_app/sign_in/sign_in__log.vue?${g_version}`),
+                path: `/:id/z_ui/z_app/task_wx_user_update/task_wx_user_update__edit`,
+                component: httpVueLoader(`/z_ui/z_app/task_wx_user_update/task_wx_user_update__edit.vue?${g_version}`),
             },
         ]
     },
     //
-    // prize_pool 奖品池
+    // test_java
     //
     {
-        path: `/:id/z_ui/z_app/prize_pool/a_index`,
+        path: `/:id/z_ui/z_app/test_java/a_index`,
         component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
-        redirect: `/:id/z_ui/z_app/prize_pool/prize_pool__item__list`,
+        redirect: `/:id/z_ui/z_app/test_java/list`,
+        //redirect: {path: `/:id/z_ui/z_app/test_java/list`, query: {__api_java__: 1}},
         children: [
             {
-                path: `/:id/z_ui/z_app/prize_pool/prize_pool__item__list`,
-                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__item__list.vue?${g_version}`),
+                path: `/:id/z_ui/z_app/test_java/list`,
+                component: httpVueLoader(`/z_ui/z_app/test_java/list.vue?${g_version}`),
             },
             {
-                path: `/:id/z_ui/z_app/prize_pool/prize_pool__item__edit`,
-                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__item__edit.vue?${g_version}`),
-            },
-            {
-                path: `/:id/z_ui/z_app/prize_pool/prize_pool__prize__list`,
-                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__prize__list.vue?${g_version}`),
-            },
-            {
-                path: `/:id/z_ui/z_app/prize_pool/prize_pool__prize__edit`,
-                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__prize__edit.vue?${g_version}`),
-            },
-            {
-                path: `/:id/z_ui/z_app/prize_pool/prize_pool__win_data__list`,
-                component: httpVueLoader(`/z_ui/z_app/prize_pool/prize_pool__win_data__list.vue?${g_version}`),
+                path: `/:id/z_ui/z_app/test_java/edit`,
+                component: httpVueLoader(`/z_ui/z_app/test_java/edit.vue?${g_version}`),
             },
         ]
     },
@@ -422,6 +569,20 @@ ui_router_app_pqrst = [
             {
                 path: `/:id/z_ui/z_app/test_ui/a_test`,
                 component: httpVueLoader(`/z_ui/z_app/test_ui/a_test.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // transfer_customer_service
+    //
+    {
+        path: `/:id/z_ui/z_app/transfer_customer_service/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/transfer_customer_service/transfer_customer_service__account`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/transfer_customer_service/transfer_customer_service__account`,
+                component: httpVueLoader(`/z_ui/z_app/transfer_customer_service/transfer_customer_service__account.vue?${g_version}`),
             },
         ]
     },

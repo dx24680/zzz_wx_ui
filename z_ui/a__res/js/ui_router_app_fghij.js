@@ -2,6 +2,32 @@ console.log('ui_router_app_fghij.js');
 
 ui_router_app_fghij = [
     //
+    // file 文件管理
+    //
+    {
+        path: `/:id/z_ui/z_app/file/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/file/file__item__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/file/a_index`,
+                component: httpVueLoader(`/z_ui/z_app/file/a_index.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/file/file__item__list`,
+                component: httpVueLoader(`/z_ui/z_app/file/file__item__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/file/file__item__add`,
+                component: httpVueLoader(`/z_ui/z_app/file/file__item__add.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/file/file__item__edit`,
+                component: httpVueLoader(`/z_ui/z_app/file/file__item__edit.vue?${g_version}`),
+            }
+        ]
+    },
+    //
     // fun 积分
     //
     {
