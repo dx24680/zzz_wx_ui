@@ -6,7 +6,15 @@ function funcIsDev()
     {
         return true;
     }
+    return false;
+}
 
+function funcIsJava()
+{
+    if (g_config.api_type)
+    {
+        return true;
+    }
     return false;
 }
 
@@ -202,13 +210,15 @@ function func_frameError_show()
     }
 }
 
-function func_frameError_msg(msg)
+function func_frameError_msg(msg, pre = false)
 {
     let frameError = window.frames['frameError'];
     if (frameError)
     {
         frameError.document.open();
-        frameError.document.write(`<pre>${msg}</pre>`);
+        if (pre) frameError.document.write(`<pre>`);
+        frameError.document.write(msg);
+        if (pre) frameError.document.write(`</pre>`);
         frameError.document.close();
     }
 }

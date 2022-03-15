@@ -384,6 +384,10 @@ ui_router_app_abcde = [
                 path: `/:id/z_ui/z_app/dist_center/dist_center__setting`,
                 component: httpVueLoader(`/z_ui/z_app/dist_center/dist_center__setting.vue?${g_version}`),
             },
+            {
+                path: `/:id/z_ui/z_app/dist_center/dist_center__poster_data__list`,
+                component: httpVueLoader(`/z_ui/z_app/dist_center/dist_center__poster_data__list.vue?${g_version}`),
+            },
         ]
     },
     //
@@ -433,6 +437,18 @@ ui_router_app_abcde = [
             {
                 path: `/:id/z_ui/z_app/dist_center_sales/dist_center_sales__team_apply__list`,
                 component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__team_apply__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/dist_center_sales/dist_center_sales__rank__u`,
+                component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__rank__u.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/dist_center_sales/dist_center_sales__rank__group_u`,
+                component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__rank__group_u.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/dist_center_sales/dist_center_sales__rank__group`,
+                component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__rank__group.vue?${g_version}`),
             },
         ]
     },

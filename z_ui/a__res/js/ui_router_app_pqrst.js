@@ -573,6 +573,36 @@ ui_router_app_pqrst = [
         ]
     },
     //
+    // tmplmsg
+    //
+    {
+        path: `/:id/z_ui/z_app/tmplmsg/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/tmplmsg/tmplmsg__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/tmplmsg/tmplmsg__list`,
+                component: httpVueLoader(`/z_ui/z_app/tmplmsg/tmplmsg__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/tmplmsg/tmplmsg__edit`,
+                component: httpVueLoader(`/z_ui/z_app/tmplmsg/tmplmsg__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/tmplmsg/tmplmsg__push_tmplmsg__list`,
+                component: httpVueLoader(`/z_ui/z_app/tmplmsg/tmplmsg__push_tmplmsg__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/tmplmsg/tmplmsg__push_tmplmsg__edit`,
+                component: httpVueLoader(`/z_ui/z_app/tmplmsg/tmplmsg__push_tmplmsg__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/tmplmsg/tmplmsg__send_log__list`,
+                component: httpVueLoader(`/z_ui/z_app/tmplmsg/tmplmsg__send_log__list.vue?${g_version}`),
+            },
+        ]
+    },
+    //
     // transfer_customer_service
     //
     {

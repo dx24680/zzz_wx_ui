@@ -24,23 +24,30 @@ axios.interceptors.response.use(
     {
         if (error.response)
         {
-            if (g_z_ui_dir == "z_ui_user" && error.response.status != 422)
+            if (error.response.status == 422)
             {
-                let errmsg_ex_copy = JSON.parse(JSON.stringify(error.response.data.errmsg_ex))
-                error.response.data.errmsg_ex = errmsg_ex_copy.split(";")
-                func_frameError_msg(JSON.stringify(error.response.data, null, 2));
+                //pass
+            }
+            //else if (g_z_ui_dir == "z_ui_user")
+            else if (typeof (error.response.data) == 'object')
+            {
+                if (error.response.data.errmsg_ex)
+                {
+                    let errmsg_ex_copy = JSON.parse(JSON.stringify(error.response.data.errmsg_ex))
+                    error.response.data.errmsg_ex = errmsg_ex_copy.split(";")
+                }
+                func_frameError_msg(JSON.stringify(error.response.data, null, 2), true);
             }
             else
             {
                 func_frameError_msg(error.response.data);
             }
+
             if (error.response.status != 422)
             {
+                if (confirm(g_common_data.STR_ACTION_ERROR_CONFIRM))
                 {
-                    if (confirm(g_common_data.STR_ACTION_ERROR_CONFIRM))
-                    {
-                        func_frameError_show();
-                    }
+                    func_frameError_show();
                 }
             }
         }

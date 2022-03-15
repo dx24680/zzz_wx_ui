@@ -13,6 +13,10 @@ function func_vue_ajax_settings()
             console.log('func_vue_ajax_settings success_callback', vue, data);
             vue.func_reload();
         },
+        err_callback: function (vue, data)
+        {
+            console.log('func_vue_ajax_settings err_callback', vue, data);
+        },
     };
 }
 
@@ -41,6 +45,10 @@ function func_vue_ajax(vue, settings)
             if (data.errcode !== 0)
             {
                 vue.$message.error(data.errmsg);
+                if (settings.err_callback)
+                {
+                    settings.err_callback(vue, data);
+                }
             }
             else
             {
@@ -62,7 +70,7 @@ function func_vue_ajax(vue, settings)
 }
 
 
-function func_vue_list(vue, page,callback)
+function func_vue_list(vue, page, callback)
 {
     console.log("func_vue_list", page);
 
@@ -90,7 +98,8 @@ function func_vue_list(vue, page,callback)
                 vue.admin_page = data.admin_page;
                 vue.list_data = data.list_data;
                 vue.list = data.list;
-                if(data.page_data){
+                if (data.page_data)
+                {
                     vue.func_set_page_data(data.page_data);
                 }
                 if (data.form)
@@ -100,7 +109,8 @@ function func_vue_list(vue, page,callback)
                     Object.assign(v_form, data.form) //接口优先级最高
                     vue.form = v_form;
                 }
-                if(callback){
+                if (callback)
+                {
                     callback(data);
                 }
             }
@@ -192,7 +202,7 @@ function func_vue_save(vue)
                 else
                 {
                     vue.$message.success("保存成功");
-                    if(form_data.checked) return
+                    if (form_data.checked) return;
                     vue.func_back();
                 }
             }
@@ -201,8 +211,8 @@ function func_vue_save(vue)
         .catch(err =>
         {
             func_loading(false);
-            console.log("111111111111111111111111",err)
-            if (err.response.status == 422)
+            console.log("func_post catch", err);
+            if (err.response && err.response.status == 422)
             {
                 console.log('err', err.response);
                 vue.v_errors = err.response.data.errors;
