@@ -2,17 +2,19 @@
 <html>
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
+    <meta name="referrer" content="no-referrer"/>
     <title></title>
     <!-- 外部公共资源 -->
     <script src="https://img.wx.xiao-bo.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://img.wx.xiao-bo.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
-    <script src="https://img.wx.xiao-bo.com/ajax/libs/vue-router/2.8.1/vue-router.min.js"></script>
+    <script src="https://img.wx.xiao-bo.com/ajax/libs/vue-router/3.5.3/vue-router.min.js"></script>
     <script src="https://img.wx.xiao-bo.com/ajax/libs/_other/httpVueLoader.1.4.2.js"></script>
     <script src="https://img.wx.xiao-bo.com/ajax/libs/_other/licia.min.js"></script>
     <!---->
@@ -61,21 +63,19 @@
 </head>
 
 <body>
-    <div id="app" v-clock>
-        <!-- app外壳页 -->
-        <template>
+<div id="app" v-clock>
+    <template>
         <router-view></router-view>
     </template>
-    </div>
+</div>
 </body>
 
 </html>
 
 
 <script>
-    g_version = 'v2022a04v';
+    g_version = 'v2022a05v';
     g_version += parseInt(new Date().valueOf() / 1000 / 60 / 10);
-
 
     let js_list = [
         'a_config.js',
@@ -85,12 +85,17 @@
     ]
     let js_index = 0;
 
-    function func_getScript() {
-        _.loadJs(`${js_list[js_index]}?${g_version}`, (isLoaded) => {
+    function func_getScript()
+    {
+        _.loadJs(`${js_list[js_index]}?${g_version}`, (isLoaded) =>
+        {
             js_index++
-            if (js_index == js_list.length) {
+            if (js_index == js_list.length)
+            {
                 func_init();
-            } else {
+            }
+            else
+            {
                 func_getScript();
             }
         })
@@ -99,24 +104,57 @@
     func_getScript();
 
 
-    function func_init() {
+    function func_init()
+    {
         console.log('func_init')
+
+        //css
+        {
+            let css_list = [
+                'a__res/css/index.css',
+            ]
+            if (g_config.index_css)
+            {
+                css_list.push(`a__res/css_custom/${g_config.index_css}`)
+            }
+            let css_index = 0;
+
+            function func_getCss()
+            {
+                _.loadCss(`${css_list[css_index]}?${g_version}`, (isLoaded) =>
+                {
+                    css_index++
+                    if (css_index < css_list.length)
+                    {
+                        func_getCss();
+                    }
+                })
+            }
+
+            func_getCss();
+        }
 
         func_init_rem_diy()
 
         // var vm
-        $(() => {
+        $(() =>
+        {
             func_init_vue()
         })
 
-        function func_init_vue() {
+        function func_init_vue()
+        {
             g_vue = new Vue({
                 el: '#app',
                 router: g_router,
-                data: function() {
+                data: function ()
+                {
                     return {}
                 },
-                mounted() {},
+                mounted()
+                {
+
+                },
                 methods: {}
             }).$mount('#app')
         }

@@ -22,6 +22,7 @@
     <script src="https://img.wx.xiao-bo.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
     <script src="https://img.wx.xiao-bo.com/ajax/libs/antv/g2/4.1.45/g2.min.js"></script>
     <script src="https://img.wx.xiao-bo.com/ajax/libs/antv/data-set/0.11.1/data-set.js"></script>
+    <script src="https://img.wx.xiao-bo.com/ajax/libs/xlsx/0.14.2/xlsx.core.min.js"></script>
 
 
     <!--
@@ -78,6 +79,7 @@
             height: 100%;
             /* border: 5px solid red; */
             font-family: NSimSun;
+            visibility: hidden;
         }
 
         .um_container {
@@ -101,8 +103,53 @@
             padding: 12px 0;
         }
 
+        .el-tag + .el-tag {
+            margin-left: 10px;
+        }
+
+        .button-new-tag {
+            margin-left: 10px;
+            height: 32px;
+            line-height: 30px;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .input-new-tag {
+            width: 90px;
+            margin-left: 10px;
+            vertical-align: bottom;
+        }
+
         .a_index {
             padding-bottom: 45px;
+        }
+
+        /*在Chrome下移除input[number]的上下箭头*/
+        .no-number::-webkit-outer-spin-button,
+        .no-number::-webkit-inner-spin-button {
+            margin: 0;
+            -webkit-appearance: none !important;
+        }
+
+        .no-number input[type="number"]::-webkit-outer-spin-button,
+        .no-number input[type="number"]::-webkit-inner-spin-button {
+            margin: 0;
+            -webkit-appearance: none !important;
+        }
+
+        /*在firefox下移除input[number]的上下箭头*/
+        .no-number {
+            -moz-appearance: textfield;
+        }
+
+        .no-number input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        /*月份日期选择器不用太长*/
+        .el-date-editor.el-input, .el-date-editor.el-date-editor--month {
+            width: 150px;
         }
     </style>
 </head>
@@ -119,36 +166,10 @@
 
 
 <script>
-    g_version = 'v2022a04v';
+    g_version = 'v2022a05v';
     g_version += parseInt(new Date().valueOf() / 1000 / 60 / 10);
 
 
-    let css_list = [
-        'https://img.wx.xiao-bo.com/a_res_app/php/admin.css'
-    ]
-    let css_index = 0;
-
-    function func_getCss()
-    {
-        _.loadCss(`${css_list[css_index]}?${g_version}`, (isLoaded) =>
-        {
-            css_index++
-            if (css_index < css_list.length)
-            {
-                func_getCss();
-            }
-        })
-    }
-
-    func_getCss();
-
-    // $.getScript('https://gw.alipayobjects.com/os/lib/antv/g2/4.1.45/dist/g2.min.js',function(){
-    //     console.log('"Checking new script"');
-    // });
-    //
-    // $.getScript('https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.11.1/dist/data-set.js',function(){
-    //     console.log('"Checking new script"');
-    // });
     let js_list = [
         'a_config.js',
         'a__res/js/ui_axios.js',
@@ -162,6 +183,7 @@
         'a__res/js/ui_router_app_pqrst.js',
         'a__res/js/ui_router_app_uvwxyz.js',
         'a__res/js/ui_router_app_z_class.js',
+        'a__res/js/ui_router_app_z_mall.js',
         'a__res/js/ui_router_app.js',
         //'https://img.wx.xiao-bo.com/a_res/js.ex/common.js',
         //'https://img.wx.xiao-bo.com/a_res_app/php/tmpl_admin.js',
@@ -173,13 +195,13 @@
         _.loadJs(`${js_list[js_index]}?${g_version}`, (isLoaded) =>
         {
             js_index++
-            if (js_index == js_list.length)
+            if (js_index < js_list.length)
             {
-                func_init();
+                func_getScript();
             }
             else
             {
-                func_getScript();
+                func_init();
             }
         })
     }
@@ -190,6 +212,37 @@
     function func_init()
     {
         console.log('func_init')
+
+        //css
+        {
+            let css_list = [
+                'https://img.wx.xiao-bo.com/a_res_app/php/admin.css',
+                'a__res/css/app.css',
+            ]
+            if (g_config.app_css)
+            {
+                css_list.push(`a__res/css_custom/${g_config.app_css}`)
+            }
+            let css_index = 0;
+
+            function func_getCss()
+            {
+                _.loadCss(`${css_list[css_index]}?${g_version}`, (isLoaded) =>
+                {
+                    css_index++
+                    if (css_index < css_list.length)
+                    {
+                        func_getCss();
+                    }
+                    else
+                    {
+                        $('#app').css('visibility', 'visible');
+                    }
+                })
+            }
+
+            func_getCss();
+        }
 
         func_init_rem_diy()
 
@@ -239,6 +292,7 @@
             Vue.component("comp_tool", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_tool.vue?${g_version}`))
             Vue.component("comp_try", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_try.vue?${g_version}`))
             //uvwxyz
+            Vue.component("comp_upload_csv", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_upload_csv.vue?${g_version}`))
             Vue.component("comp_upload_file", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_upload_file.vue?${g_version}`))
             Vue.component("comp_upload_img", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_upload_img.vue?${g_version}`))
             Vue.component("comp_upload_video", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_upload_video.vue?${g_version}`))

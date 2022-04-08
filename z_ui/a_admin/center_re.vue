@@ -29,9 +29,12 @@
                 let url_res
                 if (this.$route.query.app_url)
                 {
-                    if(g_z_ui_dir == 'z_ui_user'){
+                    if (funcIsUiUser())
+                    {
                         location.replace(`app.html#/admin?&tokenAdmin=${func_get_cookie("token_qr")}&site_id=${func_get_cookie("site_id")}&site_id_alias=${func_get_cookie("site_id_alias")}&app_id=${this.$route.query.app_id}&path=${this.$route.query.app_url}`)
-                    }else{
+                    }
+                    else
+                    {
                         url_res = `${this.$route.query.app_url}&tokenAdmin=${func_get_cookie("token_qr")}`
                         console.log("center_re url_res", this.iframe_host + url_res)
                         location.replace(this.iframe_host + url_res)
@@ -42,7 +45,7 @@
                     url_res = `${this.$route.query.url}&tokenAdmin=${func_get_cookie("token_qr")}`
                     location.replace(url_res)
                 }
-            }, 1000)
+            }, 100)
 
 
         },
