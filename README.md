@@ -1,5 +1,7 @@
 # zzz_wx_ui
 
-It is a ui admin program.
+This is a ui admin program.
+
+Use zzz_wx_ui, you can build admin like the pics below:
 
 
