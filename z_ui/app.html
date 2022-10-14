@@ -23,6 +23,7 @@
     <script src="https://img.wx.xiao-bo.com/ajax/libs/antv/g2/4.1.45/g2.min.js"></script>
     <script src="https://img.wx.xiao-bo.com/ajax/libs/antv/data-set/0.11.1/data-set.js"></script>
     <script src="https://img.wx.xiao-bo.com/ajax/libs/xlsx/0.14.2/xlsx.core.min.js"></script>
+    <script src="https://img.wx.xiao-bo.com/ajax/libs/FileSaver/2014-08-29/FileSaver.min.js"></script>
 
 
     <!--
@@ -147,10 +148,7 @@
             -moz-appearance: textfield;
         }
 
-        /*月份日期选择器不用太长*/
-        .el-date-editor.el-input, .el-date-editor.el-date-editor--month {
-            width: 150px;
-        }
+
     </style>
 </head>
 
@@ -166,7 +164,7 @@
 
 
 <script>
-    g_version = 'v2022a05v';
+    g_version = 'v2022a09v';
     g_version += parseInt(new Date().valueOf() / 1000 / 60 / 10);
 
 
@@ -261,6 +259,14 @@
                 {
                     return {}
                 },
+                watch: {
+                    $route: {
+                        handler: function (route)
+                        {
+                            $('#frameError').css('display', 'none');
+                        }
+                    }
+                },
                 mounted()
                 {
 
@@ -270,17 +276,22 @@
 
             //abcde
             Vue.component("comp_act_design", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_act_design.vue?${g_version}`))
+            Vue.component("comp_app_data_tag", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_app_data_tag.vue?${g_version}`))
+            Vue.component("comp_city_select", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_city_select.vue?${g_version}`))
             Vue.component("comp_copy", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_copy.vue?${g_version}`))
+            Vue.component("comp_corp_welcome", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_corp_welcome.vue?${g_version}`))
             Vue.component("comp_editor", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_editor.vue?${g_version}`))
             Vue.component("comp_editor_new", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_editor_new.vue?${g_version}`))
             //fghij
             Vue.component("comp_file_lock", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_file_lock.vue?${g_version}`))
+            Vue.component("comp_group_data_tag", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_group_data_tag.vue?${g_version}`))
             Vue.component("comp_img", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_img.vue?${g_version}`))
             Vue.component("comp_join_key", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_join_key.vue?${g_version}`))
             //klmno
             Vue.component("comp_menu", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_menu.vue?${g_version}`))
             Vue.component("comp_option_setting", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_option_setting.vue?${g_version}`))
             //pqrst
+            Vue.component("comp_poster_edit", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_poster_edit.vue?${g_version}`))
             Vue.component("comp_redirect_setting", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_redirect_setting.vue?${g_version}`))
             Vue.component("comp_sheet_b", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_sheet_b.vue?${g_version}`))
             Vue.component("comp_sms", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_sms.vue?${g_version}`))
@@ -291,11 +302,14 @@
             Vue.component("comp_tmplmsg", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_tmplmsg.vue?${g_version}`))
             Vue.component("comp_tool", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_tool.vue?${g_version}`))
             Vue.component("comp_try", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_try.vue?${g_version}`))
+            Vue.component("comp_tag_setting", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_tag_setting.vue?${g_version}`))
             //uvwxyz
             Vue.component("comp_upload_csv", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_upload_csv.vue?${g_version}`))
             Vue.component("comp_upload_file", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_upload_file.vue?${g_version}`))
             Vue.component("comp_upload_img", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_upload_img.vue?${g_version}`))
             Vue.component("comp_upload_video", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_upload_video.vue?${g_version}`))
+            Vue.component("comp_user", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_user.vue?${g_version}`))
+            Vue.component("comp_user_data_tag", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_user_data_tag.vue?${g_version}`))
             Vue.component("comp_user_search", httpVueLoader(`/${g_z_ui_dir}/z_app/a_comp/comp_user_search.vue?${g_version}`))
         }
     }
