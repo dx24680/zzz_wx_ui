@@ -9,10 +9,10 @@
                 label-position="left"
         >
             <div class="main_box">
-<!--                <img-->
-<!--                        class="main_bg_img"-->
-<!--                        :src="`${g_common_data.img_acc_root}/acc_login_bg.jpg`"-->
-<!--                />-->
+                <!--                <img-->
+                <!--                        class="main_bg_img"-->
+                <!--                        :src="`${g_common_data.img_acc_root}/acc_login_bg.jpg`"-->
+                <!--                />-->
                 <div class="main_pre_left">
                     <div class="main_pre_left_txt">
                         <!-- 名称 -->
@@ -57,6 +57,7 @@
                                         type="text"
                                         tabindex="1"
                                         auto-complete="on"
+                                        @keyup.enter.native="handleLogin"
                                 />
                                 <br/>
                             </div>
@@ -82,13 +83,28 @@
                                 />
                             </div>
                         </div>
+                        <div v-if="funcShowVcode()" class="inp_item">
+                            <div class="inp_title" style="display: flex; align-items: center;">
+                                <span>验证码</span>
+                                <img style="width: 100px; display: inline;" @click="funcReloadVcode" :src="vcode"/>
+                            </div>
+                            <div class="inp_line">
+                                <img
+                                        class="inp_icon"
+                                        :src="`${g_common_data.img_acc_root}/acc_icon_psw.png`"
+                                />
+                                <el-input
+                                        class="realinp"
+                                        ref="auth_code"
+                                        v-model="form.auth_code"
+                                        placeholder="验证码"
+                                        name="auth_code"
+                                        type="text"
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div class="btn_login_img butt" @click="handleLogin"></div>
-<!--                    <img-->
-<!--                            class="btn_login_img butt"-->
-<!--                            :src="`${g_common_data.img_acc_root}/acc_btn_login.png`"-->
-<!--                            @click="handleLogin"-->
-<!--                    />-->
                 </div>
             </div>
         </el-form>
@@ -140,11 +156,14 @@
                 }
             };
             return {
+                vcode: '', //验证码
+                vcode_v: (new Date()).valueOf(), //验证码，页面版本号
                 if_loging: false,
                 form: {
                     site_id: "",
                     uid: "",
-                    pwd: ""
+                    pwd: "",
+                    auth_code: "",
                 },
                 loginRules: {
                     site_id: [
@@ -180,10 +199,12 @@
             console.log("ct index")
             // clearTimeout(g_vue.st_qr_check)
             this.form.site_id = func_get_cookie("site_id") || "";
+
+            this.funcReloadVcode();
         },
         mounted()
         {
-            document.onkeydown = this.keyListener;
+            //document.onkeydown = this.keyListener;
             // 初始/ad?site_id=xxx这样监听不到，手动设一下
             if (func_get_url_query("site_id"))
             {
@@ -193,6 +214,28 @@
             }
         },
         methods: {
+            funcShowVcode()
+            {
+                console.log("dev", funcIsDevUat());
+                console.log("java", funcIsJava());
+                if (funcIsDevUat() && funcIsJava())
+                {
+                    return true;
+                }
+                return false;
+            },
+            //刷新验证码
+            funcReloadVcode()
+            {
+                if (!this.funcShowVcode())
+                {
+                    return;
+                }
+                // process.env.BASE_API
+                console.log('func_reload_vcode', this.vcode_v);
+                this.vcode = ''
+                this.vcode = `${g_config.api_root}/__api_java__/zz_admin/auth_code?v=${this.vcode_v}&_d=` + (new Date()).valueOf()
+            },
             // 当按下回车键，执行我们的代码
             keyListener(e)
             {
@@ -239,11 +282,18 @@
             // 登录接口
             func_login(userInfo)
             {
-                const {site_id, uid, pwd} = userInfo;
-                func_post("/zz_admin/index/login", {
+                let url = "/zz_admin/index/login";
+                if (funcIsJava())
+                {
+                    url = "/__api_java__/zz_admin/login";
+                }
+                const {site_id, uid, pwd, auth_code} = userInfo;
+                func_post(url, {
                     uid: uid,
                     pwd: pwd,
-                    site_id: site_id
+                    site_id: site_id,
+                    auth_code: auth_code,
+                    auth_code_v: this.vcode_v
                 })
                     .then(data =>
                     {
@@ -253,15 +303,19 @@
                         console.log("*** func_login结果", data);
                         if (data.errcode !== 0)
                         {
+                            this.funcReloadVcode();
                             this.$message.error(data.errmsg);
                         }
                         else
                         {
                             func_set_cookie("token_login", data.tokenAdmin);
                             func_set_cookie("site_id", this.form.site_id);
-                            g_common_data.auth_qr = data.auth_qr;
-                            g_common_data.auth_id = data.auth_id;
-                            g_common_data.login_skip = data.login_skip;
+                            if (!funcIsJava())
+                            {
+                                g_common_data.auth_qr = data.auth_qr;
+                                g_common_data.auth_id = data.auth_id;
+                                g_common_data.login_skip = data.login_skip;
+                            }
                             //清除自动登陆 setTimeout
                             clearInterval(g_vue.st_login_click);
                             //

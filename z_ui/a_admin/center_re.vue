@@ -26,23 +26,36 @@
             console.log("created center_re", this.$route);
             setTimeout(() =>
             {
-                let url_res
                 if (this.$route.query.app_url)
                 {
+                    //alert(10);
                     if (funcIsUiUser())
                     {
                         location.replace(`app.html#/admin?&tokenAdmin=${func_get_cookie("token_qr")}&site_id=${func_get_cookie("site_id")}&site_id_alias=${func_get_cookie("site_id_alias")}&app_id=${this.$route.query.app_id}&path=${this.$route.query.app_url}`)
                     }
                     else
                     {
-                        url_res = `${this.$route.query.app_url}&tokenAdmin=${func_get_cookie("token_qr")}`
-                        console.log("center_re url_res", this.iframe_host + url_res)
-                        location.replace(this.iframe_host + url_res)
+                        let url = `${this.iframe_host}${this.$route.query.app_url}&tokenAdmin=${func_get_cookie("token_qr")}`
+                        if (funcIsJava())
+                        {
+                            url = url.replace('/zz_admin', '/__api_java__/zz_admin');
+                        }
+                        console.log('center_re url', url);
+                        //alert(url);
+                        location.replace(url);
                     }
                 }
                 else if (this.$route.query.url)
                 {
-                    url_res = `${this.$route.query.url}&tokenAdmin=${func_get_cookie("token_qr")}`
+                    //alert(20);
+                    let url = this.$route.query.url;
+                    if (funcIsJava())
+                    {
+                        url = url.replace('/zz_admin', '/__api_java__/zz_admin');
+                    }
+                    console.log('center_re url', url);
+
+                    url_res = `${url}&tokenAdmin=${func_get_cookie("token_qr")}`
                     location.replace(url_res)
                 }
             }, 100)

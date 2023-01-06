@@ -32,6 +32,7 @@
                                 class="input-with-select inp_search"
                                 @focus="if_search_focus = true"
                                 @blur="if_search_focus = false"
+                                :clearable="true"
                         >
                             <template #append>
                                 <el-button
@@ -162,9 +163,11 @@
                 menu_act: 0,
                 app_act_item: "",
                 v_search: "",
+                v_search_init: "",
                 if_search_focus: false,
                 if_searching: false,
                 site_copy_txt: "",
+                if_init: true,
 
                 iframe_host: g_config.api_root + "/zz_admin/",
                 iframe_host_re: "",
@@ -172,8 +175,11 @@
         },
         created()
         {
+            common_noback()
+
             this.tokenAdmin = func_get_cookie("token_qr");
             func_loading();
+
             this.func_center_info();
 
             this.iframe_host_re = location.origin + location.pathname + `#/${g_z_ui_dir}/a_admin/`
@@ -189,8 +195,10 @@
                 console.log("center_ad父页接收数据-data：", e.data)  //e.data为传递过来的数据
                 that.func_center_info(e.data)
             })
+
         },
         methods: {
+
             // 点击站点名
             handle_tml_item(item)
             {
@@ -256,10 +264,16 @@
             // 外层初始化接口
             func_center_info(iframe_data)
             {
+                let url = "/zz_admin/z_center/center_info";
+                if (funcIsJava())
+                {
+                    url = "/__api_java__/zz_admin/center_info";
+                }
+
                 this.if_searching = true;
-                func_get("/zz_admin/z_center/center_info", {
+                func_get(url, {
                     tokenAdmin: func_get_cookie("token_qr"),
-                    app_keyword: (iframe_data && iframe_data.app_id) || this.v_search
+                    app_keyword: (iframe_data && iframe_data.app_id) || this.v_search_init || this.v_search
                 })
                     .then(data =>
                     {
@@ -270,7 +284,7 @@
                         if (data.errcode !== 0)
                         {
                             this.$message.error(data.errmsg);
-                            if (data.errcode == -100 || data.errcode == -200)
+                            if (data.errcode != 0)
                             {
                                 setTimeout(() =>
                                 {
@@ -281,6 +295,7 @@
                         else
                         {
                             this.menu_act = 0; //先设，防报错
+                            func_set_cookie("is_admin_super", data.is_admin_super ? 1 : 0);
 
                             if (data.group.length > 0)
                             {
@@ -307,13 +322,12 @@
 
                             if (iframe_data && iframe_data.app_id)
                             {
-                                if(iframe_data.app_url){
-
-                                }
                                 let path = encodeURIComponent(iframe_data.path);
                                 let app_url = data.group[0].list[0].app_url
                                     + encodeURIComponent(`&path=${path}&test_ui=${iframe_data.test_ui}`)
                                 let res_url = `${this.iframe_host_re}center_re?app_url=${app_url}`
+                                console.log('res_url', res_url);
+                                //return;
                                 if (iframe_data.blank)
                                 {
                                     window.open(res_url, '_blank');
@@ -325,29 +339,54 @@
                             }
                             else
                             {
-                                this.center_info = data;
-                                console.log("center_info", data)
-                                this.tml_list = [
-                                    {
-                                        title: "站点",
-                                        value: data.site_id_alias
-                                    },
-                                    {
-                                        title: "名称",
-                                        value: data.site_name
-                                    },
-                                    {
-                                        title: "账号",
-                                        value: data.acc_uid
-                                    },
-                                    {
-                                        title: "昵称",
-                                        value: data.wxname
-                                    }
-                                ];
+                                if (this.v_search_init && this.if_init)
+                                {
+                                    console.log("初始化的搜索结果：", data.group[0].list[0])
+                                    let res_item = data.group[0].list[0]
+                                    this.handle_app(res_item)
+                                    // let a_href=this.iframe_host_re + "center_re?app_url=" + res_item.app_url
+                                    let a_href = func_app_url(res_item.app_url)
+                                    $("#iframe_app").attr("src", a_href)
 
-                                // 选中样式
-                                $(".el-menu-item:eq(0)").click()
+                                    this.if_init = false
+                                    this.v_search_init = ""
+                                }
+                                else
+                                {
+                                    this.center_info = data;
+                                    console.log("center_info", data)
+                                    this.tml_list = [
+                                        {
+                                            title: "站点",
+                                            value: data.site_id_alias
+                                        },
+                                        {
+                                            title: "名称",
+                                            value: data.site_name
+                                        },
+                                        {
+                                            title: "账号",
+                                            value: data.acc_uid
+                                        },
+                                        {
+                                            title: "昵称",
+                                            value: data.wxname
+                                        }
+                                    ];
+                                    console.log("center_info.group：", this.center_info.group)
+
+                                    if (g_config.ad_app_init && this.if_init)
+                                    {
+                                        this.v_search_init = g_config.ad_app_init
+                                        this.handle_search()
+                                    }
+                                    else
+                                    {
+                                        // 选中样式
+                                        $(".el-menu-item:eq(0)").click()
+                                    }
+                                }
+
                             }
 
                         }

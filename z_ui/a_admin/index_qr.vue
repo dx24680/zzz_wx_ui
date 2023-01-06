@@ -41,10 +41,12 @@
             this.login_url = func_get_cookie("login_url");
             if (!g_common_data.auth_id || !g_common_data.auth_qr)
             {
-                this.$router.replace(this.login_url || func_get_cookie("login_url"));
-                return;
+                if (!funcIsJava())
+                {
+                    this.$router.replace(this.login_url || func_get_cookie("login_url"));
+                    return;
+                }
             }
-            this.func_qr_check();
             this.func_index_qr()
         },
         mounted()
@@ -75,7 +77,13 @@
             func_qr_check()
             {
                 if (this.$route.path !== "/z_ui/a_admin/index_qr") return
-                func_post("zz_admin/index_qr/check", {
+
+                let url = "zz_admin/index_qr/check";
+                if (funcIsJava())
+                {
+                    url = "/__api_java__/zz_admin/check_qr";
+                }
+                func_post(url, {
                     auth_id: g_common_data.auth_id,
                     tokenAdmin: func_get_cookie("token_login")
                 })
@@ -115,7 +123,13 @@
                 if (this.if_skiping) return;
                 this.if_skiping = true;
                 //func_loading();
-                func_post("zz_admin/index_qr/login_skip", {
+
+                let url = "zz_admin/index_qr/login_skip";
+                if (funcIsJava())
+                {
+                    url = "/__api_java__/zz_admin/login_skip";
+                }
+                func_post(url, {
                     auth_id: g_common_data.auth_id
                 })
                     .then(data =>
@@ -142,7 +156,13 @@
             },
             func_index_qr()
             {
-                func_get("zz_admin/index_qr", {
+                let url = "zz_admin/index_qr";
+                if (funcIsJava())
+                {
+                    url = "/__api_java__/zz_admin/index_qr";
+                }
+
+                func_get(url, {
                     auth_id: g_common_data.auth_id,
                     tokenAdmin: func_get_cookie("token_login")
                 })
@@ -159,6 +179,16 @@
                         {
                             console.log("获取二维码成功");
                             this.auth_qr = data.auth_qr
+                            if (data.auth_id)
+                            {
+                                g_common_data.auth_id = data.auth_id;
+                            }
+                            if (data.login_skip)
+                            {
+                                g_common_data.login_skip = data.login_skip;
+                            }
+
+                            this.func_qr_check();
                         }
                     })
                     .catch(err =>
@@ -207,6 +237,7 @@
     }
 
     .index_qr .qr_img {
+        width: 100%;
     }
 
     .qr_tip {

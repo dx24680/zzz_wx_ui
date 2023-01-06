@@ -68,7 +68,7 @@
                     </el-menu-item>
                   </template>
                 </el-menu> -->
-                <template v-for="(item, index) in center_info.group.menu_1">
+                <template v-for="(item, index) in menu.menu_1">
                     <template v-if="item.son_list && item.son_list.length > 0">
                         <!-- 有子列表的选项 -->
                         <div
@@ -171,6 +171,7 @@
         {
             return {
                 tokenAdmin: "",
+                menu: {}, //菜单
                 center_info: "",
                 tml_list: [], //顶部左侧信息列表
                 menu_act: 0,
@@ -179,6 +180,7 @@
                 if_search_focus: false,
                 if_searching: false,
                 site_copy_txt: "",
+                if_init: true,
 
                 iframe_host: g_config.api_root + "/zz_admin/",
                 iframe_host_re: "",
@@ -327,8 +329,14 @@
             // 外层初始化接口
             func_center_info()
             {
+                let url = "/zz_admin_acc/z_center/center_info";
+                if (funcIsJava())
+                {
+                    url = "/__api_java__/zz_admin/center_info";
+                }
+
                 this.if_searching = true;
-                func_get("/zz_admin_acc/z_center/center_info", {
+                func_get(url, {
                     tokenAdmin: func_get_cookie("token_qr"),
                     app_keyword: this.v_search
                 })
@@ -341,7 +349,7 @@
                         if (data.errcode !== 0)
                         {
                             this.$message.error(data.errmsg);
-                            if (data.errcode == -100 || data.errcode == -200)
+                            if (data.errcode != 0)
                             {
                                 setTimeout(() =>
                                 {
@@ -351,6 +359,7 @@
                         }
                         else
                         {
+
                             // if (data.group.length > 0) {
                             //   data.group.forEach((item, index) => {
                             //     if (item.group_name && item.list.length > 0) {
@@ -366,7 +375,18 @@
                             //   });
                             // }
 
-                            data.group.menu_1.forEach((item, index) =>
+                            var menu;
+                            if (funcIsJava())
+                            {
+                                menu = data.menu;
+                            }
+                            else
+                            {
+                                menu = data.group;
+                            }
+                            this.menu = menu;
+
+                            menu.menu_1.forEach((item, index) =>
                             {
                                 if (item.son_list && item.son_list.length > 0)
                                 {
@@ -445,6 +465,63 @@
                                     value: data.wxname
                                 }
                             ];
+
+                            if (g_config.acc_app_init && this.if_init)
+                            {
+                                setTimeout(() =>
+                                {
+                                    let if_found = false
+                                    for (let i = 0; i < menu.menu_1.length; i++)
+                                    {
+                                        if (if_found)
+                                        {
+                                            break
+                                        }
+                                        let item_a = menu.menu_1[i]
+                                        if (item_a.son_list && item_a.son_list.length > 0)
+                                        {
+                                            for (let j = 0; j < item_a.son_list.length; j++)
+                                            {
+                                                if (if_found)
+                                                {
+                                                    break
+                                                }
+                                                let item_b = item_a.son_list[j]
+                                                if (item_b.app_id == g_config.acc_app_init)
+                                                {
+                                                    this.funcUrlClick(i, j)
+                                                    this.if_init = false
+                                                    if_found = true
+                                                    break
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (item_a.app_id == g_config.acc_app_init)
+                                            {
+                                                this.funcUrlClick(i)
+                                                this.if_init = false
+                                                if_found = true
+                                                break
+                                            }
+                                        }
+                                    }
+
+                                    let app_url = encodeURIComponent(`${this.iframe_host}z_center_re?css=client&app_id=${g_config.acc_app_init}`)
+                                    // let a_href = this.iframe_host_re + "center_re?url=" + app_url
+                                    let a_href = func_app_url(app_url)
+                                    $("#iframe_app").attr("src", a_href)
+
+                                    this.if_init = false
+                                }, 100)
+
+                            }
+                            // else
+                            // {
+                            //
+                            // }
+
                         }
                     })
                     .catch(err =>
