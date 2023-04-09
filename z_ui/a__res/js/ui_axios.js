@@ -28,7 +28,7 @@ axios.interceptors.response.use(
             {
                 //pass
             }
-            //else if (g_z_ui_dir == "z_ui_user")
+            //else if (funcIsUiUser())
             else if (typeof (error.response.data) == 'object')
             {
                 if (error.response.data.errmsg_ex)
@@ -88,7 +88,9 @@ function func_post(url, data)
                 params.append(key, data[key]);
             }
         }
-        //*/
+        //
+        //url += '?&XDEBUG_SESSION_START=18237';
+        //
         axios({
             method: 'POST',
             data: params,
@@ -125,5 +127,28 @@ function func_get(url, data, timeout)
             {
                 reject(err)
             })
+    })
+}
+
+// 如商品中心-商品列表-编辑保存下一步-添加规格属性，data需要传json字符串
+function func_post_json(url, data)
+{
+    return new Promise((resolve, reject) =>
+    {
+        //*/
+        axios({
+            method: 'POST',
+            data: data,
+            headers: {"Content-Type": "application/json;charset=utf-8"},
+            url,
+        })
+            .then(res =>
+            {
+                resolve(res.data)
+            })
+            .catch(err =>
+            {
+                reject(err)
+            });
     })
 }

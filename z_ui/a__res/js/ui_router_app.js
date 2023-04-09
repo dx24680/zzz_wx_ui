@@ -26,6 +26,10 @@ g_routes = g_routes.concat(ui_router_app_klmno);
 g_routes = g_routes.concat(ui_router_app_pqrst);
 g_routes = g_routes.concat(ui_router_app_uvwxyz);
 g_routes = g_routes.concat(ui_router_app_z_class);
+if (typeof (ui_router_app_z_mall) != 'undefined')
+{
+    g_routes = g_routes.concat(ui_router_app_z_mall);
+}
 
 
 g_router = new VueRouter({

@@ -64,6 +64,12 @@ function func_vue_new_data()
             this.page_current = page_data.page_current;
             this.page_size = page_data.page_size;
             this.page_total = page_data.total;
+
+            if (page_data.first_page_url)
+            {
+                this.page_current = page_data.current_page;
+                this.page_size = page_data.per_page;
+            }
         }
     }
 
@@ -94,6 +100,14 @@ function func_vue_new_methods()
         func_get_path: function (curr_path, to_path)
         {
             //console.log('func_get_path', this.$route);
+            if (!curr_path)
+            {
+                curr_path = location.href;
+            }
+            if (!to_path)
+            {
+                to_path = '';
+            }
             let arr = curr_path.split('/');
             arr.pop();
             return arr.join('/') + '/' + to_path;
@@ -123,16 +137,31 @@ function func_vue_new_methods()
         },
         func_list_submit: function (page)
         {
-            console.log("func_list_submit", page);
+            console.log("func_list_submit", page, this.page_size);
             let path_res = g_vue.$route.path
             let query_res = this.form
             delete query_res.tokenAdmin
             delete query_res.is_admin_add
             delete query_res.is_admin_edit
             delete query_res.is_admin_other
+
             this.did_first_run_list = false
-            query_res.page = page;
-            g_vue.$router.replace({path: path_res, query: query_res})
+            query_res.page = 1; //this.page_current;
+            if (page)
+            {
+                query_res.page = page;
+            }
+            query_res.page_size = this.page_size;
+            console.log("func_list_submit", query_res.page, query_res.page_size);
+            query_res.ran = Math.random()
+            g_vue.$router.replace({path: path_res, query: query_res});
+            window.scrollTo(0, 0);
+        },
+        func_list_page_size: function (page_size)
+        {
+            console.log("func_list_page_size", page_size);
+            this.page_size = page_size;
+            this.func_list_submit(1);
         },
         func_list: function (page, callback)
         {
@@ -153,10 +182,18 @@ function func_vue_new_methods()
             console.log("funcTableSelectionChange", val);
             this.selected_data = val;
         },
-        func_delete: function ()
+        func_delete: function (ids_diy)
         {
             console.log('func_delete');
-            let ids = func_vue_get_selected_ids(this);
+            let ids = "";
+            if (ids_diy && typeof(ids_diy)!="object")
+            {
+                ids = ids_diy
+            }
+            else
+            {
+                ids = func_vue_get_selected_ids(this);
+            }
             if (ids == '')
             {
                 return;
@@ -199,6 +236,10 @@ function func_vue_new_methods()
             console.log("func_export_all");
             let form_data = func_vue_get_form_data(this);
             form_data.__export = 1;
+            if (bg)
+            {
+                form_data.__export_bg = 1;
+            }
             let url = g_config.api_root + this.ajax_url_export_all;
             if (url.indexOf('?') > 0)
             {
@@ -244,16 +285,25 @@ function func_vue_new_methods()
             console.log("func_back")
             this.$router.go(-1)
         },
-        func_edit: function (query, callback)
+        func_edit: function (query, callback, query_diy)
         {
             console.log("func_edit", query);
-            func_vue_edit(this, query, callback);
+            func_vue_edit(this, query, callback, query_diy);
         },
         funcSubmit: function ()
         {
             func_vue_save(this);
         },
-        funcReset: function ()
+        //清除错误信息
+        funcResetErrors: function ()
+        {
+            this.v_errors = {};
+            this.$refs['form'].validate(function ()
+            {
+            });
+        },
+        //重置字段
+        funcResetFields: function ()
         {
             this.$refs['form'].resetFields();
             this.v_errors = {};
@@ -315,6 +365,158 @@ function func_vue_new_methods()
             }
             return true;
         },
+        //权限判断
+        funcIsAuth: function (path)
+        {
+            if (!this.admin_page.auth)
+            {
+                //防止前端报错
+                return false;
+            }
+            if (this.admin_page.auth.is_admin)
+            {
+                //管理员
+                return true;
+            }
+            // debugger
+            return this.admin_page.auth.path[path] == 1;
+        },
+        funcUserPageChange: function (page_index)
+        {
+            let g_vue_data = this
+            console.log('funcUserPageChange', page_index);
+            g_vue_data.user_page_total = g_vue_data.list_data.length; //总页数
+            let begin = (page_index - 1) * g_vue_data.user_page_size;
+            let end = begin + g_vue_data.user_page_size;
+            //清空，再填充
+            g_vue_data.user_list_data = [];
+            for (var i = begin; i < end; i++)
+            {
+                if (i >= g_vue_data.user_page_total) return;
+                //
+                let data = g_vue_data.list_data[i];
+                g_vue_data.user_list_data.push(data);
+            }
+        },
+        funcExport: function (data, f_name)
+        {
+            console.log('funcExport')
+            // var data = [
+            //     ['姓名', '性别', '年龄', '注册时间'],
+            //     ['张三', '男', 18, new Date()],
+            //     ['李四', '女', 22, new Date()]
+            // ];
+            try
+            {
+                var sheet = XLSX.utils.aoa_to_sheet(data)
+
+                var sheet_name = 'data'
+                var workbook_obj = {
+                    SheetNames: [sheet_name],
+                    Sheets: {}
+                }
+                workbook_obj.Sheets[sheet_name] = sheet
+
+                var workbook = XLSX.write(workbook_obj, {
+                    bookType: 'csv',
+                    bookSST: false,
+                    type: 'binary'
+                })
+                // console.log(workbook);
+
+                var blob = this.funcWorkBookToBlob(workbook)
+
+
+                let file_name = `${(new Date()).valueOf()}.csv`
+                if (f_name)
+                {
+                    file_name = `${f_name}.csv`
+                }
+                saveAs(blob, file_name)
+            }
+            catch (e)
+            {
+                console.error(e)
+            }
+        },
+        funcWorkBookToBlob: function (s)
+        {
+            var buf = new ArrayBuffer(s.length)
+            var view = new Uint8Array(buf)
+            for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF
+
+            var b = new Blob([buf], {type: 'application/octet-stream'})
+
+            return b
+        },
+        funcChangeDate: function (e)
+        {
+            let g_vue_data = this
+            console.log('funcChangeDate', e);
+            let compDateBegin = '';
+            let compDateEnd = '';
+            if (typeof (e) == 'string')
+            {
+                compDateBegin = e;
+                compDateEnd = e;
+            }
+            else
+            {
+                compDateBegin = e[0];
+                compDateEnd = e[1];
+            }
+
+            //群ID
+            let compGroupID = '';
+            if (g_vue_data.form.compGroupID)
+            {
+                compGroupID = g_vue_data.form.compGroupID;
+            }
+
+            func_loading();
+            let form_data = func_vue_get_form_data(g_vue_data);
+            form_data.compDateBegin = compDateBegin
+            form_data.compDateEnd = compDateEnd
+            form_data.compGroupID = compGroupID
+            func_post(`${this.ajax_url_list.split('?')[0]}__funcSearch`, form_data)
+                .then(data =>
+                {
+                    //请求成功
+                    func_loading(false);
+                    if (data.errcode !== 0)
+                    {
+                        g_vue_data.$message.error(data.errmsg);
+                    }
+                    else
+                    {
+                        if (data.errcode == 0)
+                        {
+                            //先清空
+                            g_vue_data.list_data = [];
+                            //倒序
+                            for (const key in data.list)
+                            {
+                                let val = data.list[key];
+                                g_vue_data.list_data.unshift(val);
+
+                            }
+                            //设置分布
+                            g_vue_data.funcUserPageChange(1);
+                            //画图
+                            g_vue_data.funcSetChart(data.list);
+                        }
+                        else
+                        {
+                            g_vue_data.$message.error(data.errmsg);
+                        }
+                    }
+                })
+                .catch(err =>
+                {
+                    func_loading(false);
+                    g_vue_data.$message.error(err);
+                });
+        }
     }
 }
 

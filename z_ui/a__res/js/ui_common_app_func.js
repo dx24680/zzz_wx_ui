@@ -79,14 +79,14 @@ function func_vue_list_watch_route_handler(vue, callback)
 }
 
 
-function func_vue_get_selected_ids(vue, key)
+function func_vue_get_selected_ids(vue, key = "id")
 {
     let ids = ""
     if (vue.selected_data.length > 0)
     {
         vue.selected_data.forEach((item, index) =>
         {
-            ids += item.id
+            ids += item[key]
             if (index != vue.selected_data.length - 1)
             {
                 ids += ","
@@ -96,4 +96,130 @@ function func_vue_get_selected_ids(vue, key)
     console.log("func_vue_get_selected_ids", ids)
     return ids;
 }
+
+function func_vue_save_after(vue, data)
+{
+    console.log("func_vue_save_after", data);
+    if (data.errcode !== 0)
+    {
+        vue.$message.error(data.errmsg);
+    }
+    else
+    {
+        vue.$message.success("保存成功");
+    }
+}
+
+
+// 对某input组件光标位置插入指定内容：组件名ref=xxx  插入内容
+function funcSetKeyword(ref_name, keyword, vue)
+{
+    console.log("input_set_keyword");
+    if (keyword.length <= 0)
+    {
+        console.log("keyword IS NULL");
+        return;
+    }
+    var __ref = vue.$refs[ref_name];
+    if (typeof (__ref) == 'undefined')
+    {
+        console.log("组件没找到，请在组件标签加入ref=" + ref_name);
+        return;
+    }
+    if (__ref.type == 'text' || __ref.type == 'textarea')
+    {
+        //pass
+    }
+    else
+    {
+        console.log("组件只能是input");
+        return;
+    }
+    var focus_index = __ref.$el.firstElementChild.selectionStart;
+    console.log('最后一次坐光标：' + focus_index);
+    var val = __ref.value;
+    if (typeof (val) == 'undefined')
+    {
+        val = '';
+    }
+    var start = val.substring(0, focus_index);
+    var end = val.substring(focus_index, val.length);
+    __ref.value = start + keyword + end;
+    vue.form[ref_name] = __ref.value;
+    setTimeout(function ()
+    {
+        console.log('重新设置焦点位置');
+        var index = focus_index + keyword.length;
+
+        __ref.$el.firstElementChild.focus();
+        __ref.$el.firstElementChild.setSelectionRange(index, index);
+    }, 100)
+}
+
+// 图片测试发送
+function funcSendImg__(vue)
+{
+    vue.$prompt('请输入openid', '密码', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputPattern: '',
+        inputErrorMessage: ''
+    }).then(({value}) =>
+    {
+        funcSendImg(value, vue);
+    }).catch(() =>
+    {
+
+    });
+}
+
+function funcSendImg(wx_from, vue)
+{
+    // func_loading();
+    let form_data = func_vue_get_form_data(vue);
+    form_data.id = vue.form.id;
+    form_data.wx_from = wx_from
+    func_post('/z_app/lucky_card/admin/lucky_card__poster__edit__funcSendImg', form_data)
+        .then(data =>
+        {
+            //请求成功
+            func_loading(false);
+            if (data.errcode !== 0)
+            {
+                vue.$message.error(data.errmsg);
+            }
+            else
+            {
+                vue.$message.success('成功');
+
+            }
+        })
+        .catch(err =>
+        {
+            func_loading(false);
+            vue.$message.error(err);
+        });
+
+    // func_ajax({
+    //     url: "{{ funcWebServerGet('PATH_INFO') }}__funcSendImg",
+    //     data: {
+    //         id: vue.form.id,
+    //         wx_from: wx_from,
+    //     },
+    //     success: function (data)
+    //     {
+    //         console.log(data);
+    //         if (data.errcode == 0)
+    //         {
+    //             vue.$message.success("成功");
+    //         }
+    //         else
+    //         {
+    //             vue.$message.error(data.errmsg);
+    //         }
+    //     }
+    // });
+}
+
+
 

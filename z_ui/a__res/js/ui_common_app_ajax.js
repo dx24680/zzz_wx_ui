@@ -96,7 +96,19 @@ function func_vue_list(vue, page, callback)
             {
                 vue.app_title = data.app_title;
                 vue.admin_page = data.admin_page;
-                vue.list_data = data.list_data;
+                // debugger
+                if (vue.list_data_append)
+                {
+                    for (const k in data.list_data)
+                    {
+                        let v = data.list_data[k];
+                        vue.list_data.push(v);
+                    }
+                }
+                else
+                {
+                    vue.list_data = data.list_data;
+                }
                 vue.list = data.list;
                 if (data.page_data)
                 {
@@ -113,6 +125,10 @@ function func_vue_list(vue, page, callback)
                 {
                     callback(data);
                 }
+                if (vue.func_list_callback)
+                {
+                    vue.func_list_callback(data)
+                }
             }
         })
         .catch(err =>
@@ -123,12 +139,19 @@ function func_vue_list(vue, page, callback)
 }
 
 
-function func_vue_edit(vue, query, callback)
+function func_vue_edit(vue, query, callback, query_diy)
 {
     console.log("func_vue_edit", query);
     func_loading();
     let form_data = func_vue_get_form_data(vue);
+    if (query_diy)
+    {
+        form_data = {
+            tokenAdmin: vue.cookie_data.tokenAdmin
+        }
+    }
     Object.assign(form_data, query);
+    console.log("func_vue_edit form_data",form_data,query_diy)
     func_get(vue.ajax_url_edit, form_data)
         .then(data =>
         {
@@ -195,14 +218,15 @@ function func_vue_save(vue)
             {
                 //请求成功
                 console.log("*** func_vue_save 结果", data);
-                if (data.errcode !== 0)
+                func_vue_save_after(vue, data);
+                if (data.errcode == 0)
                 {
-                    vue.$message.error(data.errmsg);
-                }
-                else
-                {
-                    vue.$message.success("保存成功");
-                    if (form_data.checked) return;
+                    if (form_data.checked)
+                    {
+                        vue.funcResetErrors();
+                        return; //保存后停留
+                    }
+
                     vue.func_back();
                 }
             }

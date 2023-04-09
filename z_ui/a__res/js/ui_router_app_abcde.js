@@ -296,6 +296,443 @@ ui_router_app_abcde = [
         ]
     },
     //
+    // corp_groupchat 企业微信-群管理
+    //
+    {
+        path: `/:id/z_ui/z_app/corp_groupchat/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat__site`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat__site.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat__welcome__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat__welcome__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat__welcome__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat__welcome__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data_group__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data_group__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_app_data_tab`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_app_data_tab.vue?${g_version}`),
+                //meta: {keepAlive: true}
+                children: [
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__app_super__01`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__app_super__01.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__app_super__02`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__app_super__02.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__chain__01`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__chain__01.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__chain__02`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__chain__02.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__kan__01`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__kan__01.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__kan__02`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__kan__02.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__lucky_card__01`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__lucky_card__01.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__lucky_card__02`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__lucky_card__02.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__pin__01`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__pin__01.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__pin__02`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__pin__02.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__play_new__01`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__play_new__01.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__play_new__02`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__play_new__02.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                ]
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data_tab`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data_tab.vue?${g_version}`),
+                //meta: {keepAlive: true}
+                children: [
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data_group__info`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data_group__info.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data_group_list__info`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data_group_list__info.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data_source_group__info`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data_source_group__info.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data_source_group_list__info`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data_source_group_list__info.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data_source_time__info`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data_source_time__info.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data_stats__info`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data_stats__info.vue?${g_version}`),
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data_time__info`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data_time__info.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                ]
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data_tab_user`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data_tab_user.vue?${g_version}`),
+                //meta: {keepAlive: true}
+                children: [
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__user__01`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__user__01.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__user__02`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__user__02.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__user__03`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__user__03.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                    {
+                        path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_data__user__04`,
+                        component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_data__user__04.vue?${g_version}`),
+                        //meta: {keepAlive: true}
+                    },
+                ]
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_group__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_group__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_group__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_group__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_group_tag__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_group_tag__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_group_user__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_group_user__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_tag__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_tag__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat/corp_groupchat_tag__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat/corp_groupchat_tag__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+        ]
+    },
+    //
+    // corp_groupchat_center 企业微信-群中心
+    //
+    {
+        path: `/:id/z_ui/z_app/corp_groupchat_center/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__setting`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__topic__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__topic__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/act_design__edit`,
+                component: httpVueLoader(`/z_ui/z_app/star_act/star_act__design__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/act_design__list`,
+                component: httpVueLoader(`/z_ui/z_app/star_act/star_act_type__design__list.vue?${g_version}`),
+            },
+            // {
+            //     path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__design`,
+            //     component: httpVueLoader(`/z_ui/z_app/star_act/star_act__design__edit.vue?${g_version}`),
+            // },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__corp__group__check`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__corp__group__check.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__corp__account__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__corp__account__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__corp__account__add`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__corp__account__add.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_user__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_user__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group__chat__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group__chat__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__m2mall__spu__add`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__m2mall__spu__add.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__m2mall__spu__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__m2mall__spu__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group__add`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group__add.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group__fun_record__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group__fun_record__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__tag__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__tag__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__tag__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__tag__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__tag__add`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__tag__add.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__tag__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__tag__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__tag__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__tag__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__qr__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__qr__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__qr__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_msg__qr__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_user__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__group_user__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__master__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__master__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__master__fun_add`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__master__fun_add.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__master__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__master__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack__copy`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack__copy.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack__cover`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack__cover.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack__type_get__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack__type_get__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack__type_share__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack__type_share__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack_get__get__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack_get__get__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack_get__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack_get__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack_share__collect__group__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack_share__collect__group__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack_share__collect__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__pack_share__collect__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__setting`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__setting.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__wx__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__wx__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__wx__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__wx__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__wx__master__edit`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__wx__master__edit.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__inv_code__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__inv_code__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__inv_code__add`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__inv_code__add.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__join_pay__spu`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__join_pay__spu.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+            {
+                path: `/:id/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__order_item__list`,
+                component: httpVueLoader(`/z_ui/z_app/corp_groupchat_center/corp_groupchat_center__order_item__list.vue?${g_version}`),
+                //meta: {keepAlive: true}
+            },
+        ]
+    },
+    //
     // corp_pay_b 企业付款
     //
     {
@@ -443,12 +880,106 @@ ui_router_app_abcde = [
                 component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__rank__u.vue?${g_version}`),
             },
             {
-                path: `/:id/z_ui/z_app/dist_center_sales/dist_center_sales__rank__group_u`,
-                component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__rank__group_u.vue?${g_version}`),
+                path: `/:id/z_ui/z_app/dist_center_sales/dist_center_sales__rank_pv__u`,
+                component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__rank_pv__u.vue?${g_version}`),
             },
             {
-                path: `/:id/z_ui/z_app/dist_center_sales/dist_center_sales__rank__group`,
-                component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__rank__group.vue?${g_version}`),
+                path: `/:id/z_ui/z_app/dist_center_sales/dist_center_sales__rank__team`,
+                component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__rank__team.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/dist_center_sales/dist_center_sales__rank_pv__team`,
+                component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__rank_pv__team.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/dist_center_sales/dist_center_sales__order_item__use__list`,
+                component: httpVueLoader(`/z_ui/z_app/dist_center_sales/dist_center_sales__order_item__use__list.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // distributor 经销商
+    //
+    {
+        path: `/:id/z_ui/z_app/distributor/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/distributor/distributor__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/distributor/distributor__list`,
+                component: httpVueLoader(`/z_ui/z_app/distributor/distributor__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/distributor/distributor__edit`,
+                component: httpVueLoader(`/z_ui/z_app/distributor/distributor__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/distributor/distributor_group__list`,
+                component: httpVueLoader(`/z_ui/z_app/distributor/distributor_group__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/distributor/distributor_group__add`,
+                component: httpVueLoader(`/z_ui/z_app/distributor/distributor_group__add.vue?${g_version}`),
+            },
+        ]
+    },
+    //
+    // distributor_group 经销商-群查看
+    //
+    {
+        path: `/:id/z_ui/z_app/distributor_group/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/distributor_group/dg_group__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/distributor_group/dg_group__list`,
+                component: httpVueLoader(`/z_ui/z_app/distributor_group/dg_group__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/distributor_group/dg_group_user__list`,
+                component: httpVueLoader(`/z_ui/z_app/distributor_group/dg_group_user__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/distributor_group/dg_reg__list`,
+                component: httpVueLoader(`/z_ui/z_app/distributor_group/dg_reg__list.vue?${g_version}`),
+            }
+        ]
+    },
+    //
+    // english_study 英语学习
+    //
+    {
+        path: `/:id/z_ui/z_app/english_study/a_index`,
+        component: httpVueLoader(`/z_ui/z_app/a_tmpl/a_index.vue?${g_version}`),
+        redirect: `/:id/z_ui/z_app/english_study/english_study__type__list`,
+        children: [
+            {
+                path: `/:id/z_ui/z_app/english_study/english_study__type__list`,
+                component: httpVueLoader(`/z_ui/z_app/english_study/english_study__type__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/english_study/english_study__type__edit`,
+                component: httpVueLoader(`/z_ui/z_app/english_study/english_study__type__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/english_study/english_study__group__list`,
+                component: httpVueLoader(`/z_ui/z_app/english_study/english_study__group__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/english_study/english_study__group__edit`,
+                component: httpVueLoader(`/z_ui/z_app/english_study/english_study__group__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/english_study/english_study__word__list`,
+                component: httpVueLoader(`/z_ui/z_app/english_study/english_study__word__list.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/english_study/english_study__word__edit`,
+                component: httpVueLoader(`/z_ui/z_app/english_study/english_study__word__edit.vue?${g_version}`),
+            },
+            {
+                path: `/:id/z_ui/z_app/english_study/english_study__word__add`,
+                component: httpVueLoader(`/z_ui/z_app/english_study/english_study__word__add.vue?${g_version}`),
             },
         ]
     },

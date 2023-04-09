@@ -1,8 +1,8 @@
 console.log('ui_router.js')
 
 g_router_data = {
-    whiteList: [`/${g_z_ui_dir}/a_admin/index_qr`, '/404', `/${g_z_ui_dir}/a_admin/center_re`],
-    center_list: g_z_ui_dir == 'z_ui_user' ? ["user", "xxx"] : ["ad", "acc", "cash"],
+    whiteList: [`/${g_z_ui_dir}/a_admin/index_qr`, '/404', `/${g_z_ui_dir}/a_admin/center_re`, `/index_class`],
+    center_list: funcIsUiUser() ? ["user", "xxx"] : ["ad", "acc", "cash"],
 }
 
 
@@ -11,6 +11,11 @@ g_routes = [
         path: `/${g_z_ui_dir}/a_admin/index_qr`,
         component: httpVueLoader(`/${g_z_ui_dir}/a_admin/index_qr.vue?${g_version}`),
         meta: {title: "扫描二维码"}
+    },
+    {
+        path: '/index_class',
+        component: httpVueLoader(`/${g_z_ui_dir}/a_admin/index_class.vue?${g_version}`),
+        meta: {title: g_config.title}
     },
     {
         path: '/',
@@ -40,12 +45,12 @@ g_router_data.center_list.forEach((item, index) =>
         {
             path: `/${g_z_ui_dir}/a_admin/index/${item}`,
             component: httpVueLoader(`/${g_z_ui_dir}/a_admin/index.vue?${g_version}`),
-            meta: {title: `微信运营系统`}
+            meta: {title: g_config.title}
         },
         {
             path: `/${g_z_ui_dir}/a_admin/center_${item}`,
             component: httpVueLoader(`/${g_z_ui_dir}/a_admin/center_${item}.vue?${g_version}`),
-            meta: {title: "微信运营系统"},
+            meta: {title: g_config.title},
             // children: [
             // 	{
             // 		path: `/${g_z_ui_dir}/a_admin/center_re`,
