@@ -1,0 +1,51 @@
+.my-div {
+    margin: 10px;
+    border: 1px solid #e6e6e6;
+}
+
+.my-div .el-col {
+    border-right: 1px solid #e6e6e6;
+}
+
+.my-div .el-col:last-child {
+    border-right: none;
+}
+
+.my-row .el-card__header {
+    font-size: larger;
+    font-weight: 500;
+}
+
+.head-data-item {
+    text-align: center;
+    margin: 10px 0 10px;
+}
+
+.head-big-number {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.card-menu {
+    margin: 2%;
+}
+
+.main .el-main {
+    padding: 0;
+}
+
+.x-tab .el-tabs__header {
+    margin: 0 !important;
+}
+
+
+
+
+
+
+.main .addparam .el-select {
+    width: auto;
+}
+.main .addparam .el-input{
+    width: auto;
+}

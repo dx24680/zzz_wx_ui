@@ -1,0 +1,113 @@
+.index_ad {
+    min-height: 100%;
+    /* width: 100%; */
+    width: 48rem;
+    background-color: #ffffff;
+    /* border: .125rem solid red; */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_box {
+    position: relative;
+    width: 956px;
+    height: calc(956px * 0.59);
+    color: #413c3d;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("https://img.wx.xiao-bo.com/_ftp/a_res_app/php/admin/img.acc/acc_login_bg.jpg");
+}
+
+.main_bg_img {
+    width: 100%;
+}
+
+.main_pre {
+    position: absolute;
+    width: 445px;
+    height: 415px;
+    right: 86px;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_pre_left {
+    position: absolute;
+    width: 375px;
+    height: 440px;
+    left: 50px;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main_pre_left_txt {
+    font-size: 25px;
+    font-weight: 500;
+    color: #fff;
+    margin-top: 40px;
+}
+
+.login_title {
+    /*margin-top: 50px;*/
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 10px;
+}
+
+.inp_area {
+    display: flex;
+    flex-direction: column;
+}
+
+.inp_item {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inp_line {
+    width: 300px;
+    height: 30px;
+    border-bottom: 1px solid #dcdcdc;
+    display: flex;
+    align-items: center;
+}
+
+.inp_icon {
+    width: 20px;
+}
+
+.inp_title {
+    font-size: 14.5px;
+    letter-spacing: 2px;
+}
+
+.btn_login_img {
+    cursor: pointer;
+    width: 295px;
+    height: calc(295px * 0.15);
+    margin-top: 10px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("https://img.wx.xiao-bo.com/_ftp/a_res_app/php/admin/img.acc/acc_btn_login.png");
+}
+
+.realinp {
+    width: 100%;
+    height: 100%;
+    padding: 0 15px;
+}
+
+.login-main {
+    position: fixed;
+    top: -99999px;
+}
